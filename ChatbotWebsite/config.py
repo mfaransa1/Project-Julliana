@@ -1,4 +1,17 @@
-import os
+class Config:
+    DEBUG = True
+    SECRET_KEY = "admin"  # replace with anything
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///users.db'  # use sqlite for local test
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    MAIL_SERVER = "smtp.gmail.com"
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_USERNAME = "your-email@gmail.com"   # optional
+    MAIL_PASSWORD = "your-email-password"    # optional
+
+"""
+#import os
 
 # Config class to store all the configuration variables
 
@@ -16,4 +29,4 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USE_SSL = False
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD") """

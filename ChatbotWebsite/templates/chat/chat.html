@@ -21,10 +21,10 @@
       >
         About us🤖
       </a>
-      <button type="button" class="btn btn-lg btn-info" data-bs-toggle="popover" data-bs-title="Help" data-bs-placement="top" data-bs-content="Start the conversation by typing a greeting or ask a question (E.g. What is Mental Health, What is the cause of depression). You can also select a specific topic, test or exercise through the tab above the text input box. Having trouble with the chatting? Avoid typo as this chatbot has built-in autocorrector, thank you!">Need Help?</button>
+      <button type="button" class="btn btn-lg btn-info" data-bs-toggle="popover" data-bs-title="Help" data-bs-placement="top" data-bs-content="Start the conversation by typing a greeting or ask a question (E.g. What is Julliana, What is the cause of depression). You can also select a specific topic, test or exercise through the tab above the text input box. Having trouble with the chatting? Avoid typo as this chatbot has built-in autocorrector, thank you!">Need Help?</button>
       <button type="button" class="btn btn-lg btn-info" data-bs-toggle="popover" data-bs-title="Subject List" data-bs-placement="bottom" data-bs-content="I talk about Mental Health, Addiction, Anxiety, Depression, Disorders, Feelings, Loneliness, Medication, Meditation, Mindfulness, Personal growth, Phobia, Self-care, Sleep, Stress, Suicide, Trauma and more.">Subject</button>
       <div class="text-center">
-        Developed by Thean Yee Sin <strong>(yeesinthean@outlook.com)</strong>
+        Developed by Pardon Freezer <strong>(freezerpardon@gmail.com)</strong>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
               <img src="{{url_for('static',filename='images/chatbot.png')}}" class="chat-image"/>
               <div class="chat-bubble">
                 <div class="chat-info">
-                  <div class="chat-info-name">Mental Health Chatbot</div>
+                  <div class="chat-info-name">Julliana Chatbot</div>
                   <div class="chat-info-time">{{message.timestamp.strftime('%d/%m/%Y, %H:%M')}}</div>
                 </div>
                 <div class="chat-text">
@@ -67,7 +67,7 @@
           <img src="{{url_for('static',filename='images/chatbot.png')}}" class="chat-image"/>
         <div class="chat-bubble">
           <div class="chat-info">
-            <div class="chat-info-name">Mental Health Chatbot</div>
+            <div class="chat-info-name">Julliana Chatbot</div>
             <div class="chat-info-time">**:**</div>
           </div>
           {%if current_user.is_authenticated%}
@@ -78,11 +78,11 @@
               <br><br>
               With that said,
               <br>
-              Hi {{current_user.username}}, welcome back to Mental Health Chatbot! Go ahead and send me a message. 😄 
+              Hi {{current_user.username}}, welcome back to Julliana Chatbot! Go ahead and send me a message. 😄 
             </div>
           {%else%}
           <div class="chat-text">
-            Hello, welcome to Mental Health Chatbot! Go ahead and send me a message. 😄
+            Hello, welcome to Julliana Chatbot! Go ahead and send me a message. 😄
             <br><br>
               Please do understand that this is a chatbot and not a real person, please don't subtitute this for real help.
               <br><br>
