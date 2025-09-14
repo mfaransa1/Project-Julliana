@@ -1,5 +1,3 @@
----
-
 ## 📌 Project Julliana: An AI-Powered Mental Health Companion
 
 ### 🧠 Overview
