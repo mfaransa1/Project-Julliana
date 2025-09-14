@@ -1,60 +1,98 @@
-# Python-Mental-Health-Chatbot(Web-based)
+---
 
-This is my final year project at my university
+## 📌 Project Julliana: An AI-Powered Mental Health Companion
 
-AIM: This is built to educate users with the correct knowledge of mental health and also provide some functions to improve mental health ***(NOT DIAGNOSIS)***.
+### 🧠 Overview
 
-<sub>Duration Taken: Roughly 1 and a half months, Final Result: A+</sub>
+**Project Julliana** is a conversational AI chatbot designed to provide mental health support, guidance, and resources. It uses **Natural Language Processing (NLP)** and **Machine Learning** to simulate empathetic conversations, helping users feel supported in times of stress, anxiety, or loneliness.
 
-## Languages/Components Used
+⚠️ *Disclaimer: Julliana is **not a substitute for professional medical advice**. In case of an emergency, please contact a licensed mental health professional or hotline in your region.*
 
-- Frontend: Python
-- Backend: Python
-- Database: MySQL
+---
 
-## Installation
+### ✨ Features
 
-```
-git clone
-```
-Note: Configure your application in the `config.py` and database and make sure the database and URI are set up correctly
-```
-pip install -r requirements.txt
-```
+* 🤖 AI-powered chatbot with NLP (trained on mental health–related data).
+* 💬 User-friendly conversational interface via web app (Flask).
+* 🔐 User authentication (register, login, profile management).
+* 📊 Tracks user interactions for improved chatbot responses.
+* 📚 Integration with local mental health resources and hotlines.
 
-```
-python run.py
-```
+---
 
-## Functions
-- Register, Login, and Continue as a Guest (For privacy reasons)
-- Chat with the chatbot
-- Select a specific topic
-- Conduct a mental health test
-- Mindfulness Exercises
-- Journalling for manual tracking
-- SOS Hotline (Only Malaysia)
-- Edit profile
+### 🛠️ Tech Stack
 
-## Technical Domain
-- Create using Python
-- Flask for the Web
-- SQLAlchemy for Database
-- Bootstrap for the UI
-- TensorFlow and NLTK for the machine learning model
-- Other Library like Flask-login, Flask-bcrypt
+* **Frontend:** HTML, CSS, Bootstrap
+* **Backend:** Python (Flask)
+* **Database:** SQLite / MySQL
+* **AI/ML:** TensorFlow, NLTK
+* **Other:** Flask-Mail for email alerts
 
-## Screenshots
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/63239c57-86fd-4e19-a909-cfd86e101fce)
+---
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/d15f235a-ae37-4c4b-9245-640528e147d3)
+### 🚀 Installation & Setup
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/b9a479bb-a148-4fc2-8cda-0d8fd192d023)
+1. Clone the repo:
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/baf0f1b5-d4b2-479b-bb52-07cd055e00f9)
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/Project-Julliana.git
+   cd Project-Julliana
+   ```
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/06cb6f7f-a20c-4980-aa9e-b006d9ac7190)
+2. Create a virtual environment:
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/f0c138af-2b8f-4d35-b2a7-8c3b70102bea)
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate   # on Windows
+   ```
 
-![image](https://github.com/TheanYeeSin/Web-Based-Python-Mental-Health-Chatbot/assets/68727045/556d6e84-f8f0-4480-ab06-d4523895486d)
+3. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Configure environment variables in `.env`:
+
+   ```ini
+   SECRET_KEY=your_secret_key
+   SQLALCHEMY_DATABASE_URI=sqlite:///users.db
+   MAIL_USERNAME=your_email@gmail.com
+   MAIL_PASSWORD=your_password
+   ```
+
+5. Initialize the database:
+
+   ```bash
+   flask shell
+   >>> from ChatbotWebsite import db
+   >>> db.create_all()
+   >>> exit()
+   ```
+
+6. Run the app:
+
+   ```bash
+   python run.py
+   ```
+
+7. Open in browser: [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+---
+
+### 🌍 Mental Health Resources (Kenya)
+
+* **Befrienders Kenya** – 0722 178 177 / [befrienderskenya.org](https://www.befrienderskenya.org/)
+* **Chiromo Hospital Group Helpline** – 0709 901 000
+* **Red Cross Kenya Helpline** – 1199
+* **Amani Counselling Centre** – 0733 755 000
+* **Mental 360** – [mental360.co](https://mental360.co/)
+
+---
+
+### 📖 License
+
+This project is licensed under the MIT License.
+
+---
+
