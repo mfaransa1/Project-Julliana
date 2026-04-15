@@ -9,12 +9,15 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout
 from keras.optimizers import Adam
 from keras.models import load_model
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 nltk.download("punkt")
 nltk.download("wordnet")
-
+nltk.download("vader_lexicon")
 # Lemmatizer
 lemmatizer = WordNetLemmatizer()
+#Vader Lexicon
+sia = SentimentIntensityAnalyzer()
 
 # load intents
 with open("ChatbotWebsite/static/data/intents.json") as file:
@@ -118,7 +121,32 @@ def bag_of_words(message, words):
 
 # context
 context = {}
+# =========================
+# 🧠 Emotion Detection
+# =========================
+def detect_emotion(text):
+    score = sia.polarity_scores(text)
 
+    if score['compound'] >= 0.5:
+        return "positive"
+    elif score['compound'] <= -0.5:
+        return "negative"
+    else:
+        return "neutral"
+
+
+# =========================
+# 🚨 Crisis Detection
+# =========================
+CRISIS_WORDS = [
+    "suicide", "kill myself", "end my life",
+    "i want to die", "life is pointless",
+    "i can't go on"
+]
+
+def is_crisis(message):
+    message = message.lower()
+    return any(word in message for word in CRISIS_WORDS)
 
 # predict class, return list of tuples (tag, probability)
 def predict_class(message, ERROR_THRESHOLD=0.25):
@@ -136,7 +164,30 @@ def predict_class(message, ERROR_THRESHOLD=0.25):
 def get_response(message, id="000"):
     spell = Speller()  # autocorrect
     corrected_message = spell(message)
-    results = predict_class(corrected_message)  # get list of tuples (tag, probability)
+
+    # =========================
+    # 🚨 1. Crisis Detection (TOP PRIORITY)
+    # =========================
+    if is_crisis(corrected_message):
+        return ("🚨 I'm really sorry you're feeling this way.\n"
+                "You are not alone.\n"
+                "Please reach out immediately:\n"
+                "- Call 1199 (Kenya Mental Health Hotline)\n"
+                "- Talk to someone you trust\n"
+                "- Visit a nearby hospital")
+
+    # =========================
+    # 🧠 2. Emotion Detection
+    # =========================
+    emotion = detect_emotion(corrected_message)
+
+    if emotion == "negative":
+        return "I'm really sorry you're feeling this way. I'm here for you. Do you want to talk about it?"
+
+    # =========================
+    # 🟢 3. NORMAL CHATBOT LOGIC
+    # =========================
+    results = predict_class(corrected_message)
     if results:  # if results exist
         while results:  # loop through results
             for intent in intents["intents"]:  # loop through intents
