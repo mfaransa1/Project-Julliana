@@ -1,6 +1,296 @@
 {
   "intents": [
     {
+  "tag": "feeling_sad",
+  "patterns": [
+    "I feel sad", "I'm sad", "I'm feeling down",
+    "Life is hard", "I'm tired of everything",
+    "Niko down", "Naskia vibaya", "Nimechoka maisha",
+    "I feel empty", "Nothing makes sense"
+  ],
+  "responses": [
+    "I'm really sorry you're feeling this way. Do you want to talk about what's making you feel like this?",
+    "It's okay to feel this way sometimes. I'm here for you.",
+    "Pole sana 😔 What’s been bothering you?",
+    "You're not alone in this. Talk to me."
+  ]
+  },
+  {
+  "tag": "greeting_luo",
+  "patterns": [
+    "amosi",
+    "nadi",
+    "ima",
+    "ing'eyo",
+    "ber ahinya",
+    "misawa",
+    "hello",
+    "hi"
+  ],
+  "responses": [
+    "Amosi! Ineno nade kawuono?",
+    "Nadi! Idhi nade?",
+    "Ber ahinya! In gi wach moro?",
+    "Ahinya! An ka gi i kanyo mondo asiepi kodi."
+  ]
+},
+{
+  "tag": "sad_luo",
+  "patterns": [
+    "achiel",
+    "achieng'",
+    "aonge gi mor",
+    "aonge gi chuny maber",
+    "chuny otho",
+    "apar gi piny",
+    "aonge gi thuolo"
+  ],
+  "responses": [
+    "Pole ahinya. Idwaro wuoyo e gima omako chunyi?",
+    "Awinjo ni ichandore. In ok in kendini.",
+    "Weche mago tek, to wan ka gi i kanyo.",
+    "Wuoy kodi, an ka ni ka isiepi."
+  ]
+},
+{
+  "tag": "anger_luo",
+  "patterns": [
+    "achandore",
+    "aich",
+    "awinjore gi mirima",
+    "gima osetimora ohero marach",
+    "an gi ich marach",
+    "awinjore marach ahinya"
+  ],
+  "responses": [
+    "Awinjo ni ichandore. Idwaro wuoyo e kaka gima osetimore?",
+    "Ber mondo ichweya odiechieng' matin.",
+    "Yie, wachni tek. To wan ka ni mondo wakonyi.",
+    "Wuoy, an ka ni mondo asiepi kodi."
+  ]
+},
+{
+  "tag": "stress_luo",
+  "patterns": [
+    "awinjo chandruok",
+    "paro ahinya",
+    "wichkuot oonge gi yweyo",
+    "apar matek",
+    "aonge gi yweyo",
+    "awinjo ng'iyo marach"
+  ],
+  "responses": [
+    "Nyingi mondo iyud yweyo matin.",
+    "Kawuono tem yweyo e chuny kod ng'ama matin.",
+    "Ok onego iting' weche duto kar achiel.",
+    "Wuoy kodi, gima iparo en ang'o?"
+  ]
+},
+{
+  "tag": "confusion_luo",
+  "patterns": [
+    "aonge gi ngeyo",
+    "aparo ka aonge gi yore",
+    "achandore gi paro",
+    "aonge gi weche maber",
+    "aonge gi paro maler"
+  ],
+  "responses": [
+    "Ber, weche moko bedo tek mondo ing'e.",
+    "Wanyalo pimo wachni matin matin.",
+    "Ok onego ing'e duto kawuono.",
+    "Nyisa an gima omiyo ichandore."
+  ]
+},
+{
+  "tag": "tired_luo",
+  "patterns": [
+    "achiel matek",
+    "aonge gi teko",
+    "aot",
+    "awinjo ka aol",
+    "aonge gi chuny mar tiyo",
+    "dhiang' otho"
+  ],
+  "responses": [
+    "Ineno ka idwaro yweyo.",
+    "Yweyo matin biro konyi.",
+    "Isetiyo matek, ber mondo iyud yweyo.",
+    "Bed gi thuolo mar yweyo kendo."
+  ]
+},
+{
+  "tag": "crisis_luo",
+  "patterns": [
+    "adwaro tho",
+    "aonge gi dwaro mar ngima",
+    "ngima oonge gi tiend",
+    "dwa mar tho omaka",
+    "anyalo dhi marach"
+  ],
+  "responses": [
+    "Pole ahinya. Ngima mari ber ahinya. Tafadhali wuoy gi ng'ama ihero kata jatend wach.",
+    "In gi tiend maduong'. Konyruok nitie. Tafadhali dhi i ng'ama inyalo wuoyo kod gi.",
+    "Ok in kendini. Tafadhali many ng'ama inyalo wuoyo kod gi kawuono.",
+    "Ber mondo idhi i jatend wach kata osiep ma inyalo konyi."
+  ]
+},
+
+  {
+  "tag": "feeling_sad2",
+  "patterns": [
+    "I feel sad", "I'm sad", "I'm feeling down",
+    "Life is hard", "I'm tired of everything",
+    "I feel empty", "Nothing makes sense",
+    "Niko down", "Naskia vibaya", "Nimechoka maisha",
+    "Niko low", "Nimelemewa", "Si feel poa",
+    "Vitu si sawa", "Niko depressed", "Nimekata tamaa",
+    "Maisha imenichosha"
+  ],
+  "responses": [
+    "Pole sana 😔 I'm really sorry you're feeling this way. Want to talk about it?",
+    "I’m here for you. You don’t have to go through this alone.",
+    "Naskia. Life inaweza kuwa tough sana. Talk to me.",
+    "It’s okay to feel like this sometimes. What’s been bothering you?"
+  ]
+},
+{
+  "tag": "anxiety34",
+  "patterns": [
+    "I'm stressed", "I'm overwhelmed", "I'm anxious",
+    "I can't relax", "Too much is going on",
+    "I'm panicking",
+    "Niko na stress", "Naskia pressure mingi",
+    "Nimelemewa na kazi", "Kuna pressure mingi",
+    "Niko confused", "Kichwa imejaa",
+    "Niko na overthinking", "Nawaza sana"
+  ],
+  "responses": [
+    "Pole 😔 that sounds overwhelming. Let’s take it one step at a time.",
+    "You're safe. Breathe in… breathe out. I'm here with you.",
+    "Naskia pressure iko mingi. Want to talk about what's causing it?",
+    "You don’t have to solve everything at once. Let’s break it down."
+  ]
+},
+{
+  "tag": "anxiety",
+  "patterns": [
+    "I'm anxious", "I feel nervous", "I'm stressed",
+    "I can't relax", "I'm overwhelmed",
+    "Niko na stress", "Naskia pressure mingi",
+    "Too much is going on", "I'm panicking"
+  ],
+  "responses": [
+    "That sounds overwhelming. Try taking a deep breath. I'm here with you.",
+    "You're safe. Let's slow things down together.",
+    "Pole 😔 stress inaweza kuwa tough. Want to talk about it?",
+    "Take it one step at a time. You don’t have to handle everything at once."
+  ]
+},
+{
+  "tag": "anger",
+  "patterns": [
+    "I'm angry", "I'm frustrated", "I'm pissed off",
+    "Everything is annoying me",
+    "Nimekasirika", "Niko na hasira",
+    "Nimejam", "Nimejaa Ngori", "Natetemeka",
+    "Watu wananiudhi","Nimechoka na watu"
+  ],
+  "responses": [
+    "I hear you. It is okay to feel angry sometimes. What happened?",
+    "Pole 😔 anger inaweza kuwa heavy. Talk to me.",
+    "Take a deep breath. What is making you feel this way?",
+    "Naskia uko na hasira. Unataka kuniambia kulikoni?"
+  ]
+},
+{
+  "tag": "checkinn",
+  "patterns": [
+    "Niko tu", "Niko sawa", "Niko fiti",
+    "Niko poa", "Niko kawaida",
+    "Life iko tu", "Vitu ni normal",
+    "Si mbaya", "Niko alright",
+    "Tu tu", "Hakuna noma"
+  ],
+  "responses": [
+    "Sawa 😊 but kama kuna kitu unafeel ndani, you can talk to me.",
+    "Good to hear. But I'm here if anything is bothering you.",
+    "Nice 😊 keep going. And if anything changes, I'm here.",
+    "Poa. Lakini usibebe vitu peke yako—talk to me anytime."
+  ]
+},
+{
+  "tag": "crisise3",
+  "patterns": [
+    "I want to die", "I want to kill myself",
+    "Life is pointless", "I can't go on",
+    "Nataka kufa", "Sitaki kuishi",
+    "Maisha haina maana", "Nimechoka kuishi",
+    "Nataka kujitoa"
+  ],
+  "responses": [
+    "🚨 I'm really sorry you're feeling this way.\nYou are not alone.\nPlease call 1199 or talk to someone you trust immediately.",
+    "Please reach out to someone right now. You matter. You are not alone."
+  ]
+},
+
+{
+  "tag": "greeting44",
+  "patterns": [
+    "Hi", "Hello", "Hey",
+    "Sasa", "Mambo", "Niaje", "Vipi",
+    "Sasa bro", "Mambo vipi", "Niaje man",
+    "Aje", "Uko aje", "Form ni gani",
+    "Wasee mko aje", "Ni aje buda"
+  ],
+  "responses": [
+    "Sasa 😊 uko aje?",
+    "Niaje! I'm here for you. How are you feeling?",
+    "Hey! Talk to me, what's on your mind?",
+    "Mambo 😊 hope you're doing okay. What's up?"
+  ]
+},
+{
+  "tag": "seeking_help",
+  "patterns": [
+    "I need help", "Can someone help me",
+    "Where can I get help", "I need support",
+    "Nahitaji msaada", "Naweza pata help wapi"
+  ],
+  "responses": [
+    "You can reach out to these mental health resources in Kenya:\n\n- Call 1199 (24/7 Mental Health Hotline)\n- Befrienders Kenya: 0722178177\n- Visit a nearby hospital",
+    "It's a strong step to ask for help. You're not alone. Consider contacting a professional or someone you trust."
+  ]
+},{
+  "tag": "sheng_checkin",
+  "patterns": [
+    "Niko tu", "Niko sawa", "Niko fiti",
+    "Niko poa", "Life iko tu", "Vitu ni tricky",
+    "Niko stressed kidogo", "Si easy"
+  ],
+  "responses": [
+    "Naskia. Life huwa tricky sometimes. Want to talk more about it?",
+    "Sawa. But kama kuna kitu inakusumbua, I'm here.",
+    "I feel you. Si lazima ubebe everything peke yako.",
+    "Talk to me. What's really going on?"
+  ]
+},
+  {
+  "tag": "greeting3",
+  "patterns": [
+    "Hi", "Hello", "Hey", "Sasa", "Mambo", "Niaje",
+    "Hi there", "Hey there", "Good morning", "Good evening",
+    "Sasa bro", "Niaje man", "Mambo vipi"
+  ],
+  "responses": [
+    "Hey! I'm here for you. How are you feeling today?",
+    "Hi there 😊 How can I support you today?",
+    "Sasa 😊 uko aje today?",
+    "Hey, talk to me. What's on your mind?"
+  ]
+    },
+
+    {
       "tag": "Greeting",
       "patterns": [
         "Hi",
@@ -193,7 +483,7 @@
         "How were you created?"
       ],
       "responses": [
-        "I was created by Thean Yee Sin as his final year project.",
+        "I was created by Pardon Freezer as his final year project.",
         "I was trained on a text dataset using Deep Learning & Natural Language Processing techniques",
         "The real question is: Who created you?"
       ],
