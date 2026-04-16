@@ -88,3 +88,7 @@ def mindfulness():
     title = request.form["title"]
     description, file_name = get_description(title)
     return jsonify({"description": description, "file_name": file_name})
+
+@chatbot.route("/privacy")
+def privacy():
+    return render_template("privacy.html", title="Privacy Policy")

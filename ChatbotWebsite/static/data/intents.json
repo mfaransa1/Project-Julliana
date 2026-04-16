@@ -11,27 +11,27 @@
   "responses": [
     "I'm really sorry you're feeling this way. Do you want to talk about what's making you feel like this?",
     "It's okay to feel this way sometimes. I'm here for you.",
-    "Pole sana 😔 What’s been bothering you?",
+    "Pole sana  What’s been bothering you?",
     "You're not alone in this. Talk to me."
   ]
   },
   {
   "tag": "greeting_luo",
   "patterns": [
-    "amosi",
-    "nadi",
+    "amosi kanyo",
+    "nade bois",
     "ima",
     "ing'eyo",
     "ber ahinya",
-    "misawa",
-    "hello",
+    "oyawre sana",
+    "idhii nade",
     "hi"
   ],
   "responses": [
     "Amosi! Ineno nade kawuono?",
-    "Nadi! Idhi nade?",
-    "Ber ahinya! In gi wach moro?",
-    "Ahinya! An ka gi i kanyo mondo asiepi kodi."
+    "Nade! Idhi nade?",
+    "Ber ahinya, Osiepa! In gi wach moro?",
+    "Ber Ahinya Osiepa! An ma fine. Miya wach."
   ]
 },
 {
@@ -49,41 +49,41 @@
     "Pole ahinya. Idwaro wuoyo e gima omako chunyi?",
     "Awinjo ni ichandore. In ok in kendini.",
     "Weche mago tek, to wan ka gi i kanyo.",
-    "Wuoy kodi, an ka ni ka isiepi."
+    "Wuo koda, an kae ni kaka osiepi."
   ]
 },
 {
   "tag": "anger_luo",
   "patterns": [
-    "achandore",
+    "achandora",
     "aich",
-    "awinjore gi mirima",
+    "awinjo mirima",
     "gima osetimora ohero marach",
-    "an gi ich marach",
-    "awinjore marach ahinya"
+    "an gi lit masirias",
+    "awinjo marach ahinya"
   ],
   "responses": [
-    "Awinjo ni ichandore. Idwaro wuoyo e kaka gima osetimore?",
-    "Ber mondo ichweya odiechieng' matin.",
-    "Yie, wachni tek. To wan ka ni mondo wakonyi.",
-    "Wuoy, an ka ni mondo asiepi kodi."
+    "Awinjo ni ichandori. Idwaro wuoyo e kaka gima osetimore?",
+    "Ber mondo iywe e odiechieng' matin.",
+    "Ayie, wachni tek. To wan ka ni mondo wakonyi.",
+    "Wuo, an ka ni mondo akonyi."
   ]
 },
 {
   "tag": "stress_luo",
   "patterns": [
     "awinjo chandruok",
-    "paro ahinya",
+    "paro ahinga",
     "wichkuot oonge gi yweyo",
     "apar matek",
     "aonge gi yweyo",
     "awinjo ng'iyo marach"
   ],
   "responses": [
-    "Nyingi mondo iyud yweyo matin.",
+    "Nindi mondo iyud yweyo matin.",
     "Kawuono tem yweyo e chuny kod ng'ama matin.",
-    "Ok onego iting' weche duto kar achiel.",
-    "Wuoy kodi, gima iparo en ang'o?"
+    "Ok onego iting' weche duto e chunyi.",
+    "Wuo koda, gima iparo en ang'o?"
   ]
 },
 {
@@ -91,7 +91,7 @@
   "patterns": [
     "aonge gi ngeyo",
     "aparo ka aonge gi yore",
-    "achandore gi paro",
+    "achandori gi paro",
     "aonge gi weche maber",
     "aonge gi paro maler"
   ],
@@ -99,7 +99,7 @@
     "Ber, weche moko bedo tek mondo ing'e.",
     "Wanyalo pimo wachni matin matin.",
     "Ok onego ing'e duto kawuono.",
-    "Nyisa an gima omiyo ichandore."
+    "Nyisa ane gima omiyo ichandori."
   ]
 },
 {
@@ -107,10 +107,10 @@
   "patterns": [
     "achiel matek",
     "aonge gi teko",
-    "aot",
+    "aol manoma",
     "awinjo ka aol",
     "aonge gi chuny mar tiyo",
-    "dhiang' otho"
+    "dhiang' mara othoo"
   ],
   "responses": [
     "Ineno ka idwaro yweyo.",
@@ -148,7 +148,7 @@
     "Maisha imenichosha"
   ],
   "responses": [
-    "Pole sana 😔 I'm really sorry you're feeling this way. Want to talk about it?",
+    "Pole sana  I'm really sorry you're feeling this way. Want to talk about it?",
     "I’m here for you. You don’t have to go through this alone.",
     "Naskia. Life inaweza kuwa tough sana. Talk to me.",
     "It’s okay to feel like this sometimes. What’s been bothering you?"
@@ -166,7 +166,7 @@
     "Niko na overthinking", "Nawaza sana"
   ],
   "responses": [
-    "Pole 😔 that sounds overwhelming. Let’s take it one step at a time.",
+    "Pole  that sounds overwhelming. Let’s take it one step at a time.",
     "You're safe. Breathe in… breathe out. I'm here with you.",
     "Naskia pressure iko mingi. Want to talk about what's causing it?",
     "You don’t have to solve everything at once. Let’s break it down."
@@ -183,7 +183,7 @@
   "responses": [
     "That sounds overwhelming. Try taking a deep breath. I'm here with you.",
     "You're safe. Let's slow things down together.",
-    "Pole 😔 stress inaweza kuwa tough. Want to talk about it?",
+    "Pole  stress inaweza kuwa tough. Want to talk about it?",
     "Take it one step at a time. You don’t have to handle everything at once."
   ]
 },
@@ -198,7 +198,7 @@
   ],
   "responses": [
     "I hear you. It is okay to feel angry sometimes. What happened?",
-    "Pole 😔 anger inaweza kuwa heavy. Talk to me.",
+    "Pole anger inaweza kuwa heavy. Talk to me.",
     "Take a deep breath. What is making you feel this way?",
     "Naskia uko na hasira. Unataka kuniambia kulikoni?"
   ]
@@ -213,9 +213,9 @@
     "Tu tu", "Hakuna noma"
   ],
   "responses": [
-    "Sawa 😊 but kama kuna kitu unafeel ndani, you can talk to me.",
+    "Sawa  but kama kuna kitu unafeel ndani, you can talk to me.",
     "Good to hear. But I'm here if anything is bothering you.",
-    "Nice 😊 keep going. And if anything changes, I'm here.",
+    "Nice  keep going. And if anything changes, I'm here.",
     "Poa. Lakini usibebe vitu peke yako—talk to me anytime."
   ]
 },
@@ -229,7 +229,7 @@
     "Nataka kujitoa"
   ],
   "responses": [
-    "🚨 I'm really sorry you're feeling this way.\nYou are not alone.\nPlease call 1199 or talk to someone you trust immediately.",
+    "I'm really sorry you're feeling this way.\nYou are not alone.\nPlease call 1199 or talk to someone you trust immediately.",
     "Please reach out to someone right now. You matter. You are not alone."
   ]
 },
@@ -239,15 +239,15 @@
   "patterns": [
     "Hi", "Hello", "Hey",
     "Sasa", "Mambo", "Niaje", "Vipi",
-    "Sasa bro", "Mambo vipi", "Niaje man",
+    "Sasa bro", "Mambo vipi", "Rada mzee",
     "Aje", "Uko aje", "Form ni gani",
-    "Wasee mko aje", "Ni aje buda"
+    "We mzee uko aje", "Ni aje buda"
   ],
   "responses": [
-    "Sasa 😊 uko aje?",
+    "Sasa mzee, uko aje?",
     "Niaje! I'm here for you. How are you feeling?",
     "Hey! Talk to me, what's on your mind?",
-    "Mambo 😊 hope you're doing okay. What's up?"
+    "Mambo hope you're doing okay. What's up?"
   ]
 },
 {
@@ -259,7 +259,7 @@
   ],
   "responses": [
     "You can reach out to these mental health resources in Kenya:\n\n- Call 1199 (24/7 Mental Health Hotline)\n- Befrienders Kenya: 0722178177\n- Visit a nearby hospital",
-    "It's a strong step to ask for help. You're not alone. Consider contacting a professional or someone you trust."
+    "It's a strong step to ask for help. You're not alone. Consider contacting a professional or someone you trust.Call 1199 (24/7 Mental Health Hotline)\n- Befrienders Kenya: 0722178177"
   ]
 },{
   "tag": "sheng_checkin",
