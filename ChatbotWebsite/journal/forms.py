@@ -9,6 +9,6 @@ class JournalForm(FlaskForm):
         "How are you feeling?", validators=[DataRequired(), Length(max=30)]
     )
     content = TextAreaField(
-        "Express more!", validators=[DataRequired(), Length(max=3000)]
+        "Express more!", validators=[DataRequired(), Length(max=2000)]
     )
     submit = SubmitField("Submit")
