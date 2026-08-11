@@ -1,7 +1,9 @@
 import json
 
+from ChatbotWebsite.chatbot.paths import MINDFULNESS_PATH
+
 # load mindfulness exercises from json file
-with open("ChatbotWebsite/static/mindfulness/mindfulness.json") as file:
+with MINDFULNESS_PATH.open(encoding="utf-8") as file:
     mindfulness_exercises = json.load(file)
 
 

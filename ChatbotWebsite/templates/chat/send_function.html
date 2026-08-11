@@ -4,6 +4,11 @@
   const msgerForm = get(".chat-inputarea");
   const msgerInput = get(".chat-input");
   const msgerChat = get(".main-chat");
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+  $.ajaxSetup({
+    headers: { "X-CSRFToken": csrfToken },
+  });
 
   //images and name for bot and user
   const BOT_IMG = "static/images/chatbot.png";
@@ -95,7 +100,7 @@
           <div class="chat-info-name">${name}</div>
           <div class="chat-info-time">${formatDate(new Date())}</div>
         </div>
-        <div class="chat-text">${text}</div>
+          <div class="chat-text">${escapeHtml(text)}</div>
       </div>
     </div>
     `;
@@ -184,7 +189,7 @@ function appendExercise(name, img, side, description, file_name) {
         <div class="chat-info-name">${name}</div>
         <div class="chat-info-time">${formatDate(new Date())}</div>
       </div>
-      <div class="chat-text mb-2">${description}</div>
+      <div class="chat-text mb-2">${escapeHtml(description)}</div>
       <audio id="music-player" controls>
         <source src="${audio_src}" type="audio/mpeg">
       </audio>
@@ -198,6 +203,12 @@ function appendExercise(name, img, side, description, file_name) {
   function get(selector, root = document) {
     //get element by selector
     return root.querySelector(selector);
+  }
+
+  function escapeHtml(value) {
+    const element = document.createElement("div");
+    element.textContent = String(value);
+    return element.innerHTML;
   }
 
   function formatDate(date) {

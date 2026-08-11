@@ -1,0 +1,7 @@
+{
+  "language": "en",
+  "examples": [
+    {"tag": "feeling_sad", "pattern": "I feel low today"},
+    {"tag": "anxiety", "pattern": "I am worried and overwhelmed"}
+  ]
+}

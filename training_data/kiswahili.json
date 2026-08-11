@@ -1,0 +1,7 @@
+{
+  "language": "sw",
+  "examples": [
+    {"tag": "feeling_sad", "pattern": "Niko down sana leo"},
+    {"tag": "anxiety", "pattern": "Naskia pressure mingi"}
+  ]
+}

@@ -3,13 +3,23 @@
     
     <div class="container-fluid d-grid">
         <a class="btn mx-auto mt-3 mb-4 btn-info btn-lg" href="{{url_for('journals.new_journal')}}">Add Journal</a>
+        <form class="row justify-content-center mb-4" method="GET" action="{{ url_for('journals.all_journals') }}">
+            <div class="col-md-6">
+                <label class="visually-hidden" for="journal-search">Search your journals</label>
+                <div class="input-group">
+                    <input id="journal-search" class="form-control" type="search" name="q" value="{{ search_query }}" maxlength="100" placeholder="Search your private journals">
+                    <button class="btn btn-outline-info" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+        {% if journals.items %}
         <div class="ms-auto">
             {% for page_num in journals.iter_pages(left_edge=1,right_edge=1, left_current=1,right_current=1) %}
                 {%if page_num%}
                     {%if journals.page ==page_num%}
-                    <a href="{{url_for('journals.all_journals',page=page_num)}}" class="btn btn-secondary mb-4">{{page_num}}</a>
+                    <a href="{{url_for('journals.all_journals',page=page_num,q=search_query)}}" class="btn btn-secondary mb-4">{{page_num}}</a>
                     {%else%}
-                        <a href="{{url_for('journals.all_journals',page=page_num)}}" class="btn btn-outline-secondary mb-4">{{page_num}}</a>
+                        <a href="{{url_for('journals.all_journals',page=page_num,q=search_query)}}" class="btn btn-outline-secondary mb-4">{{page_num}}</a>
                     {%endif%}
                 {%else%}
                     ...
@@ -41,5 +51,12 @@
             </div>
             </div>
         {% endfor %}
+        {% else %}
+        <section class="container text-center py-5">
+            <h2>{% if search_query %}No matching journal entries{% else %}Your journal is ready when you are{% endif %}</h2>
+            <p class="text-muted">{% if search_query %}Try a different word or clear the search.{% else %}Journal entries are private and visible only to you.{% endif %}</p>
+            {% if not search_query %}<a class="btn btn-info" href="{{ url_for('journals.new_journal') }}">Write your first entry</a>{% endif %}
+        </section>
+        {% endif %}
     </div>
-{% endblock content%}   
+{% endblock content%}

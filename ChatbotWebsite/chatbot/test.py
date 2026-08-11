@@ -1,7 +1,9 @@
 import json
 
+from ChatbotWebsite.chatbot.paths import TESTS_PATH
+
 # load tests from json file
-with open("ChatbotWebsite/static/data/tests.json") as file:
+with TESTS_PATH.open(encoding="utf-8") as file:
     tests = json.load(file)
 
 

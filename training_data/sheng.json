@@ -1,0 +1,7 @@
+{
+  "language": "sheng",
+  "examples": [
+    {"tag": "greeting44", "pattern": "Sasa mzee uko aje"},
+    {"tag": "anxiety", "pattern": "Niko stressed mob"}
+  ]
+}

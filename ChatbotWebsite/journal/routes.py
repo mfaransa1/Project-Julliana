@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, abort, request
 from flask_login import current_user, login_required
+from sqlalchemy import or_
 from ChatbotWebsite.models import Journal
 from ChatbotWebsite.journal.forms import JournalForm
 from ChatbotWebsite import db
@@ -12,12 +13,24 @@ journals = Blueprint("journals", __name__)
 @login_required
 def all_journals():
     page = request.args.get("page", 1, type=int)  # Pagination
-    journals = (
-        Journal.query.filter_by(user_id=current_user.id)
-        .order_by(Journal.timestamp.desc())
-        .paginate(page=page, per_page=5)
+    search_query = request.args.get("q", "", type=str).strip()[:100]
+    query = Journal.query.filter_by(user_id=current_user.id)
+    if search_query:
+        query = query.filter(
+            or_(
+                Journal.mood.ilike(f"%{search_query}%"),
+                Journal.content.ilike(f"%{search_query}%"),
+            )
+        )
+    journals = query.order_by(Journal.timestamp.desc()).paginate(
+        page=page, per_page=5, error_out=False
     )
-    return render_template("all_journals.html", title="Journals", journals=journals)
+    return render_template(
+        "all_journals.html",
+        title="Journals",
+        journals=journals,
+        search_query=search_query,
+    )
 
 
 # New Journal Page
@@ -44,11 +57,9 @@ def new_journal():
 @journals.route("/journal/<int:journal_id>")
 @login_required
 def journal(journal_id):
-    journal = Journal.query.get_or_404(journal_id)  # Get journal from database
-    if (
-        journal.user != current_user
-    ):  # If journal does not belong to current user, abort
-        abort(403)
+    journal = Journal.query.filter_by(
+        id=journal_id, user_id=current_user.id
+    ).first_or_404()
     return render_template(
         "journal.html", title="Journal #" + str(journal.id), journal=journal
     )
@@ -58,11 +69,9 @@ def journal(journal_id):
 @journals.route("/journal/<int:journal_id>/update", methods=["GET", "POST"])
 @login_required
 def update_journal(journal_id):
-    journal = Journal.query.get_or_404(journal_id)  # Get journal from database
-    if (
-        journal.user != current_user
-    ):  # If journal does not belong to current user, abort
-        abort(403)
+    journal = Journal.query.filter_by(
+        id=journal_id, user_id=current_user.id
+    ).first_or_404()
     form = JournalForm()  # Create Journal Form
     if (
         form.validate_on_submit()
@@ -88,11 +97,9 @@ def update_journal(journal_id):
 @journals.route("/journal/<int:journal_id>/delete", methods=["POST"])
 @login_required
 def delete_journal(journal_id):
-    journal = Journal.query.get_or_404(journal_id)  # Get journal from database
-    if (
-        journal.user != current_user
-    ):  # If journal does not belong to current user, abort
-        abort(403)
+    journal = Journal.query.filter_by(
+        id=journal_id, user_id=current_user.id
+    ).first_or_404()
     db.session.delete(journal)
     db.session.commit()
     flash("Journal has been deleted!", "success")

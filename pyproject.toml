@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-juliana"
+version = "0.1.0"
+description = "A privacy-conscious mental-health companion web application."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { file = "LICENSE" }
+dependencies = [
+    "autocorrect==2.6.1",
+    "email-validator>=2.2,<3",
+    "Flask==3.1.3",
+    "Flask-Bcrypt==1.0.1",
+    "Flask-Login==0.6.3",
+    "Flask-Mail==0.10.0",
+    "Flask-Migrate==4.1.0",
+    "Flask-SQLAlchemy==3.1.1",
+    "Flask-WTF==1.2.2",
+    "itsdangerous==2.2.0",
+    "nltk==3.9.2",
+    "numpy>=1.26,<2.4",
+    "Pillow>=11.0,<12",
+    "PyMySQL==1.1.2",
+    "python-dotenv==1.1.1",
+    "tensorflow==2.21.0",
+    "WTForms==3.2.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3,<9",
+]
+
+[project.scripts]
+juliana-train = "ChatbotWebsite.chatbot.trainer:train"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.setuptools.packages.find]
+include = ["ChatbotWebsite*"]

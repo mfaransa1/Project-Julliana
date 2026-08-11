@@ -21,8 +21,18 @@ from ChatbotWebsite.users.forms import (
 )
 from ChatbotWebsite.users.utils import save_picture, send_reset_email
 import os
+from urllib.parse import urljoin, urlparse
 
 users = Blueprint("users", __name__)
+
+
+def is_safe_redirect_url(target: str | None) -> bool:
+    """Accept only same-site relative redirects after authentication."""
+    if not target:
+        return False
+    reference = urlparse(request.host_url)
+    candidate = urlparse(urljoin(request.host_url, target))
+    return candidate.scheme in {"http", "https"} and candidate.netloc == reference.netloc
 
 
 # register page/route
@@ -65,8 +75,11 @@ def login():
             login_user(user, remember=form.remember_me.data)
             flash("You have been logged in!", "success")
             next_page = request.args.get("next")
-            return redirect(next_page) if next_page else redirect(url_for("main.home"))
+            if is_safe_redirect_url(next_page):
+                return redirect(next_page)
+            return redirect(url_for("main.home"))
         else:
+            current_app.logger.warning("Failed login attempt")
             flash("Login Unsuccessful. Please check email and password!", "danger")
     return render_template("login.html", title="Login", form=form)
 
@@ -99,7 +112,8 @@ def account():
 
 
 # logout route
-@users.route("/logout")
+@users.route("/logout", methods=["POST"])
+@login_required
 def logout():
     logout_user()
     return redirect(url_for("main.home"))
@@ -107,30 +121,39 @@ def logout():
 
 # delete conversation route
 @users.route("/delete_conversation", methods=["POST"])
+@login_required
 def delete_conversation():
-    if current_user.is_authenticated:
-        messages = ChatMessage.query.filter_by(user_id=current_user.id).all()
-        for message in messages:
-            db.session.delete(message)
-        db.session.commit()
-        flash("Your conversation has been deleted!", "success")
+    messages = ChatMessage.query.filter_by(user_id=current_user.id).all()
+    for message in messages:
+        db.session.delete(message)
+    db.session.commit()
+    flash("Your conversation has been deleted!", "success")
     return redirect(url_for("users.account"))
 
 
 # delete account route
 @users.route("/delete_account", methods=["POST"])
+@login_required
 def delete_account():
-    if current_user.is_authenticated:
-        messages = ChatMessage.query.filter_by(user_id=current_user.id).all()
-        for message in messages:
-            db.session.delete(message)
-        journals = Journal.query.filter_by(user_id=current_user.id).all()
-        for journal in journals:
-            db.session.delete(journal)
-        db.session.delete(current_user)
-        db.session.commit()
-        flash("Your account has been deleted!", "success")
-    return redirect(url_for("users.logout"))
+    user = current_user._get_current_object()
+    profile_image = user.profile_image
+    messages = ChatMessage.query.filter_by(user_id=current_user.id).all()
+    for message in messages:
+        db.session.delete(message)
+    journals = Journal.query.filter_by(user_id=current_user.id).all()
+    for journal in journals:
+        db.session.delete(journal)
+    db.session.delete(user)
+    db.session.commit()
+    logout_user()
+    if profile_image != "default.jpg":
+        picture_path = os.path.join(
+            current_app.root_path, "static", "profile_images", os.path.basename(profile_image)
+        )
+        if os.path.isfile(picture_path):
+            os.remove(picture_path)
+    flash("Your account has been deleted!", "success")
+    return redirect(url_for("main.home"))
 
 
 # reset password route to request a password reset token
@@ -143,9 +166,10 @@ def reset_request():
     form = RequestResetForm()  # create request reset form
     if form.validate_on_submit():  # if form is submitted, send email with reset token
         user = User.query.filter_by(email=form.email.data).first()
-        send_reset_email(user)
+        if user and current_app.config["MAIL_ENABLED"]:
+            send_reset_email(user)
         flash(
-            "An email has been sent with instructions to reset your password.", "info"
+            "If that email address has an account, reset instructions will be sent.", "info"
         )
         return redirect(url_for("users.login"))
     return render_template("reset_request.html", title="Reset Password", form=form)

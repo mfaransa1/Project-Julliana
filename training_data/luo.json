@@ -1,0 +1,7 @@
+{
+  "language": "luo",
+  "examples": [
+    {"tag": "greeting_luo", "pattern": "Amosi kanyo"},
+    {"tag": "sad_luo", "pattern": "Aonge gi mor"}
+  ]
+}

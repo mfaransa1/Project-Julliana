@@ -4,6 +4,7 @@ data.pickle
 venv/
 __pycache__/
 *.pyc
+*.egg-info/
 instance/
 .env
 .env.*

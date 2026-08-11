@@ -3,27 +3,35 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
-from ChatbotWebsite.config import Config
+from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
+from ChatbotWebsite.config import Config, get_config
 
 # Initialize the extensions
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 mail = Mail()
+migrate = Migrate()
 login_manager = LoginManager()
+csrf = CSRFProtect()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
 
-def create_app(config_class=Config):
+def create_app(config_class: type[Config] | None = None):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    selected_config = config_class or get_config()
+    app.config.from_object(selected_config)
+    selected_config.validate()
     app.static_folder = 'static'
 
     # Initialize the extensions
     db.init_app(app)
     bcrypt.init_app(app)
     mail.init_app(app)
+    migrate.init_app(app, db, compare_type=True)
     login_manager.init_app(app)
+    csrf.init_app(app)
 
     # Import the routes
     from ChatbotWebsite.main.routes import main
