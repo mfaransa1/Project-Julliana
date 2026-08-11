@@ -27,6 +27,7 @@ dependencies = [
     "python-dotenv==1.1.1",
     "tensorflow==2.21.0",
     "WTForms==3.2.1",
+    "gunicorn>=23,<27",
 ]
 
 [project.optional-dependencies]
