@@ -2,6 +2,14 @@
   "language": "sw",
   "examples": [
     {"tag": "feeling_sad", "pattern": "Niko down sana leo"},
-    {"tag": "anxiety", "pattern": "Naskia pressure mingi"}
+    {"tag": "anxiety", "pattern": "Naskia pressure mingi"},
+    {"tag": "Stress School", "pattern": "Mitihani zimenipea stress sana"},
+    {"tag": "Stress School", "pattern": "Nimelemewa na kazi ya shule"},
+    {"tag": "Stress Financial", "pattern": "Nawaza sana kuhusu pesa"},
+    {"tag": "Stress Family", "pattern": "Kuna pressure mingi nyumbani"},
+    {"tag": "Anxiety Feeling", "pattern": "Mawazo hainipei pumziko"},
+    {"tag": "Sadness Feeling", "pattern": "Naskia huzuni sana leo"},
+    {"tag": "Sleepless Feeling", "pattern": "Sina usingizi kwa sababu ya mawazo"},
+    {"tag": "Breathing Techniques", "pattern": "Nisaidie na zoezi la kupumua"}
   ]
 }

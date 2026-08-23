@@ -24,6 +24,7 @@ dependencies = [
     "numpy>=1.26,<2.4",
     "Pillow>=11.0,<12",
     "PyMySQL==1.1.2",
+    "psycopg[binary]>=3.2,<4",
     "python-dotenv==1.1.1",
     "tensorflow==2.21.0",
     "WTForms==3.2.1",

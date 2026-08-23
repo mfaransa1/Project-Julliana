@@ -102,11 +102,14 @@ Never commit `.env`. All sensitive values belong in environment variables.
 
 Production refuses to start without `SECRET_KEY` and `DATABASE_URL`. Set `JULIANA_ENV=production`; secure cookie settings are enabled by the production configuration. Serve production traffic only over HTTPS.
 
+For Render PostgreSQL, set `DATABASE_URL` to the database's **Internal Database URL**. The project includes the `psycopg` PostgreSQL driver; do not use the database display name as the URL.
+
 ## Chatbot training and model lifecycle
 
 Run training as a separate process, never through the web application:
 
 ```powershell
+python scripts/validate_training_data.py
 python -m ChatbotWebsite.chatbot.trainer
 # or, after installation:
 juliana-train

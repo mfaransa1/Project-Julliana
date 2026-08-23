@@ -2,6 +2,12 @@
   "language": "luo",
   "examples": [
     {"tag": "greeting_luo", "pattern": "Amosi kanyo"},
-    {"tag": "sad_luo", "pattern": "Aonge gi mor"}
+    {"tag": "sad_luo", "pattern": "Aonge gi mor"},
+    {"tag": "Stress School", "pattern": "Timbe mar skul omako matek"},
+    {"tag": "Stress School", "pattern": "Exams omiyo awinjo pressure"},
+    {"tag": "Stress Family", "pattern": "Awinjo pressure e ot"},
+    {"tag": "anxiety", "pattern": "Awinjo wach mang'eny e parona"},
+    {"tag": "sad_luo", "pattern": "Awinjo chunya oting'o"},
+    {"tag": "Breathing Techniques", "pattern": "Konywa gi yor yweyo maber"}
   ]
 }

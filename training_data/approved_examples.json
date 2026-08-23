@@ -1,4 +1,21 @@
 {
-  "dataset_version": "1",
-  "examples": []
+  "dataset_version": "2",
+  "examples": [
+    {"tag": "Stress School", "pattern": "My exams are overwhelming me"},
+    {"tag": "Stress School", "pattern": "I have too many school deadlines"},
+    {"tag": "Stress Job", "pattern": "My workload is making me anxious"},
+    {"tag": "Stress Financial", "pattern": "Money worries are stressing me"},
+    {"tag": "Stress Relationship", "pattern": "My relationship problems are draining me"},
+    {"tag": "Stress Family", "pattern": "There is a lot of pressure at home"},
+    {"tag": "Anxiety Feeling", "pattern": "My thoughts will not slow down"},
+    {"tag": "Anxiety Feeling", "pattern": "I feel nervous about everything"},
+    {"tag": "Anxiety Tips", "pattern": "What can I do when anxiety gets strong"},
+    {"tag": "Sadness Feeling", "pattern": "I have been feeling heavy and low"},
+    {"tag": "Loneliness Feeling", "pattern": "I feel alone even around other people"},
+    {"tag": "Sleepless Feeling", "pattern": "I cannot switch off my mind at night"},
+    {"tag": "Feeling Insecured", "pattern": "I keep doubting myself"},
+    {"tag": "Breathing Techniques", "pattern": "Can you guide me through a breathing exercise"},
+    {"tag": "Mindfulness Techniques", "pattern": "I need a simple grounding exercise"},
+    {"tag": "Reiterate", "pattern": "Can you tell me more about that"}
+  ]
 }

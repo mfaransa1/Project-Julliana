@@ -1,0 +1,9 @@
+{
+  "version": "20260823T063631Z",
+  "created_at": "2026-08-23T06:36:31.379624+00:00",
+  "dataset_version": "2",
+  "validation_accuracy": null,
+  "training_accuracy": 0.9029126167297363,
+  "safety_tests_passed": false,
+  "status": "candidate"
+}

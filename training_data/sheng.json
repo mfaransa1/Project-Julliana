@@ -2,6 +2,13 @@
   "language": "sheng",
   "examples": [
     {"tag": "greeting44", "pattern": "Sasa mzee uko aje"},
-    {"tag": "anxiety", "pattern": "Niko stressed mob"}
+    {"tag": "anxiety", "pattern": "Niko stressed mob"},
+    {"tag": "Stress School", "pattern": "Exams zimenipea pressure mob"},
+    {"tag": "Stress School", "pattern": "Shule imenilemea vibaya"},
+    {"tag": "Stress Financial", "pattern": "Pesa inaniletea ngori"},
+    {"tag": "Anxiety Feeling", "pattern": "Mawazo imenishika mbaya"},
+    {"tag": "Sadness Feeling", "pattern": "Niko low mbaya leo"},
+    {"tag": "Loneliness Feeling", "pattern": "Naskia niko solo sana"},
+    {"tag": "Breathing Techniques", "pattern": "Nipee breathing exercise poa"}
   ]
 }
