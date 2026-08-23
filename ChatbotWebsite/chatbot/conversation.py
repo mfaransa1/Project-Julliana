@@ -27,6 +27,7 @@ class ConversationState:
     awaiting_question: bool = False
     safety_check_pending: bool = False
     last_response: str | None = None
+    context_bridge_used: bool = False
 
 
 class ConversationMemory:
@@ -48,12 +49,18 @@ class ConversationMemory:
         response: str,
     ) -> None:
         state = self.state_for(conversation_id)
+        if intent and intent != state.intent:
+            state.context_bridge_used = False
         state.intent = intent
         state.topic = topic_for_intent(intent) or state.topic
         state.emotion = emotion
         state.language = language
         state.awaiting_question = response.rstrip().endswith("?")
         state.last_response = response
+
+    def mark_context_bridge_used(self, conversation_id: str) -> None:
+        """Permit at most one inferred short-answer bridge per active topic."""
+        self.state_for(conversation_id).context_bridge_used = True
 
     def start_safety_check(self, conversation_id: str) -> None:
         state = self.state_for(conversation_id)
@@ -110,11 +117,22 @@ def follow_up_response(state: ConversationState, message: str) -> str | None:
 def contextual_answer_response(state: ConversationState, message: str) -> str | None:
     """Treat a likely short answer as context only under narrow conditions."""
     words = normalized_phrase(message).split()
-    if not state.topic or not 1 <= len(words) <= 6:
+    if (
+        not state.topic
+        or state.context_bridge_used
+        or yes_or_no(message) is not None
+        or not 1 <= len(words) <= 6
+    ):
         return None
     stress_anchor = bool(set(words) & {"school", "exam", "exams", "work", "family", "relationship"})
     if not state.awaiting_question and not (state.topic == "stress" and stress_anchor):
         return None
+    if state.topic == "sad" and set(words) & {"sick", "ill", "unwell"}:
+        return (
+            "I'm sorry you are feeling unwell. Physical illness can make emotions feel "
+            "heavier too. Rest and fluids may help, and please consider a clinician if "
+            "your symptoms are severe, worsening, or worrying."
+        )
     prompts = {
         "stress": "Thanks for sharing that. It sounds as though that may be adding to the stress. What part feels most difficult right now?",
         "anxiety": "Thank you for saying that. What happens in your body or thoughts when that feeling starts?",

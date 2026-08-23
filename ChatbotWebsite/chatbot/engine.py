@@ -73,6 +73,7 @@ class ChatbotEngine:
         contextual = follow_up_response(state, message)
         contextual = contextual or contextual_answer_response(state, message)
         if contextual:
+            self._memory.mark_context_bridge_used(conversation_id)
             self._memory.remember(
                 conversation_id,
                 intent=state.intent,

@@ -47,3 +47,12 @@ def test_short_answer_continues_an_open_stress_question():
 
     assert reply is not None
     assert "stress" in reply.lower()
+
+
+def test_contextual_bridge_does_not_repeat_for_yes_or_multiple_short_answers():
+    state = conversation.ConversationState(topic="sad", awaiting_question=True)
+
+    assert conversation.contextual_answer_response(state, "I am sick") is not None
+    state.context_bridge_used = True
+    assert conversation.contextual_answer_response(state, "Yes") is None
+    assert conversation.contextual_answer_response(state, "I feel depressed") is None
