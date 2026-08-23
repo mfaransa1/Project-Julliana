@@ -143,15 +143,16 @@
           </ul>
         </div>
       </div>
-      <form id="message-form" class="chat-inputarea" image_file={{ current_user.profile_image if current_user.is_authenticated else "default.jpg" }}>
-        <input
-          type="text"
+      <form id="message-form" class="chat-inputarea" image_file="{{ current_user.profile_image if current_user.is_authenticated else 'default.jpg' }}">
+        <textarea
           class="chat-input"
           id="textInput"
+          rows="1"
           autocomplete="off"
-          placeholder="Enter your message..."
-        />
-        <button type="submit" class="btn btn-outline-info">Send</button>
+          placeholder="Write a message… (Enter to send, Shift+Enter for a new line)"
+          aria-label="Message Juliana"
+        ></textarea>
+        <button id="send-button" type="submit" class="btn btn-info">Send</button>
       </form>
     </div>
   </div>

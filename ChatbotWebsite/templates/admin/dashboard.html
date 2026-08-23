@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="container py-4 py-md-5">
+  <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
+    <div>
+      <p class="text-uppercase small text-muted mb-1">Administration</p>
+      <h1 class="h2 mb-1">Service insights</h1>
+      <p class="text-muted mb-0">Aggregate operational metrics only. Private journal and chat content are never shown here.</p>
+    </div>
+  </div>
+
+  <section class="row row-cols-2 row-cols-lg-5 g-3 mb-4" aria-label="Service totals">
+    {% for label, value in [('Accounts', stats.users), ('Conversations', stats.messages), ('Journal entries', stats.journals), ('Learning candidates', stats.candidates), ('Model records', stats.models)] %}
+    <div class="col"><article class="card h-100"><div class="card-body"><p class="text-muted small mb-1">{{ label }}</p><p class="display-6 mb-0">{{ value }}</p></div></article></div>
+    {% endfor %}
+  </section>
+
+  <section class="row g-4">
+    <div class="col-lg-4"><article class="card h-100"><div class="card-body"><h2 class="h5">Candidate review status</h2>{% set values = candidate_statuses %}{% include "admin/_breakdown.html" %}</div></article></div>
+    <div class="col-lg-4"><article class="card h-100"><div class="card-body"><h2 class="h5">Proposed intent mix</h2>{% set values = intent_distribution %}{% include "admin/_breakdown.html" %}</div></article></div>
+    <div class="col-lg-4"><article class="card h-100"><div class="card-body"><h2 class="h5">Detected language mix</h2>{% set values = language_distribution %}{% include "admin/_breakdown.html" %}</div></article></div>
+    <div class="col-lg-4"><article class="card h-100"><div class="card-body"><h2 class="h5">Model status</h2>{% set values = model_statuses %}{% include "admin/_breakdown.html" %}</div></article></div>
+  </section>
+</main>
+{% endblock content %}

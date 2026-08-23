@@ -4,6 +4,7 @@
   const msgerForm = get(".chat-inputarea");
   const msgerInput = get(".chat-input");
   const msgerChat = get(".main-chat");
+  const sendButton = get("#send-button");
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
   $.ajaxSetup({
@@ -20,20 +21,59 @@
   //post request for chatting
   $(document).ready(function () {
     $("#message-form").on("submit", function (event) {
-      appendMessage(USER_NAME, USER_IMG, "right", $("#textInput").val());
       event.preventDefault();
+      const message = msgerInput.value.trim();
+      if (!message || sendButton.disabled) return;
+
+      appendMessage(USER_NAME, USER_IMG, "right", message);
+      msgerInput.value = "";
+      setSending(true);
+      appendTyping();
       $.ajax({
         data: {
-          msg: $("#textInput").val(),
+          msg: message,
         },
         type: "POST",
         url: "/chat_messages",
       }).done(function (data) {
         appendMessage(BOT_NAME, BOT_IMG, "left", data.msg);
+      }).fail(function () {
+        appendMessage(BOT_NAME, BOT_IMG, "left", "I couldn't send that just now. Please try again.");
+      }).always(function () {
+        removeTyping();
+        setSending(false);
+        msgerInput.focus();
       });
-      $("#textInput").val("");
+    });
+
+    msgerInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        msgerForm.requestSubmit();
+      }
     });
   });
+
+  function setSending(isSending) {
+    sendButton.disabled = isSending;
+    msgerInput.disabled = isSending;
+    sendButton.textContent = isSending ? "Sending…" : "Send";
+  }
+
+  function appendTyping() {
+    if (document.getElementById("typing-indicator")) return;
+    const typingHTML = `
+      <div id="typing-indicator" class="chat left-msg" aria-live="polite">
+        <img src="${BOT_IMG}" class="chat-image" alt="">
+        <div class="chat-bubble"><div class="typing-indicator" aria-label="Juliana is typing"><span></span><span></span><span></span></div></div>
+      </div>`;
+    msgerChat.insertAdjacentHTML("beforeend", typingHTML);
+    msgerChat.scrollTop = msgerChat.scrollHeight;
+  }
+
+  function removeTyping() {
+    document.getElementById("typing-indicator")?.remove();
+  }
 
   function responseTopic(rawTitle) {
     // post request for topic, bot will response with the content of the topic

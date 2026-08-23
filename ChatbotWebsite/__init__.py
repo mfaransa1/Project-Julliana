@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
@@ -39,6 +39,7 @@ def create_app(config_class: type[Config] | None = None):
     from ChatbotWebsite.users.routes import users
     from ChatbotWebsite.errors.handlers import errors
     from ChatbotWebsite.journal.routes import journals
+    from ChatbotWebsite.admin.routes import admin, is_admin_user
 
     # Register the routes
     app.register_blueprint(users)
@@ -46,5 +47,10 @@ def create_app(config_class: type[Config] | None = None):
     app.register_blueprint(main)
     app.register_blueprint(errors)
     app.register_blueprint(journals)
+    app.register_blueprint(admin)
+
+    @app.context_processor
+    def inject_admin_state():
+        return {"is_admin": is_admin_user(current_user)}
 
     return app

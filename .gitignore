@@ -1,6 +1,6 @@
 **/__pycache__
-chatbot-model.h5
-data.pickle
+# The reviewed legacy model and vocabulary are deployment assets. Keep them in
+# version control until a validated `models/current/` replacement is promoted.
 venv/
 __pycache__/
 *.pyc

@@ -13,6 +13,7 @@ spec.loader.exec_module(config)
 ConfigurationError = config.ConfigurationError
 ProductionConfig = config.ProductionConfig
 get_config = config.get_config
+_csv_set = config._csv_set
 
 
 class CompleteProductionConfig(ProductionConfig):
@@ -39,3 +40,8 @@ def test_complete_production_configuration_is_accepted():
 def test_unknown_environment_is_rejected():
     with pytest.raises(ConfigurationError, match="Unsupported JULIANA_ENV"):
         get_config("unsupported")
+
+
+def test_admin_allow_list_is_case_insensitive_and_opt_in():
+    assert _csv_set(None) == frozenset()
+    assert _csv_set(" Admin, reviewer ") == frozenset({"admin", "reviewer"})

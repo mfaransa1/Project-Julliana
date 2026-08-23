@@ -27,6 +27,13 @@ def _database_url() -> str | None:
     return os.getenv("DATABASE_URL") or os.getenv("SQLALCHEMY_DATABASE_URI")
 
 
+def _csv_set(value: str | None) -> frozenset[str]:
+    """Normalize a comma-separated allow-list from the environment."""
+    if not value:
+        return frozenset()
+    return frozenset(item.strip().casefold() for item in value.split(",") if item.strip())
+
+
 class Config:
     """Common settings shared by all environments."""
 
@@ -59,6 +66,8 @@ class Config:
     LEARNING_TRAINING_THRESHOLD = int(
         os.getenv("LEARNING_TRAINING_THRESHOLD", "20")
     )
+    # Insights are deliberately opt-in and based on exact account usernames.
+    ADMIN_USERNAMES = _csv_set(os.getenv("ADMIN_USERNAMES"))
 
     @classmethod
     def validate(cls) -> None:
