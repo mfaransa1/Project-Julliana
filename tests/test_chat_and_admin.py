@@ -18,7 +18,7 @@ def test_chat_endpoint_persists_a_user_and_bot_message(client, app, make_user, m
     monkeypatch.setattr(
         "ChatbotWebsite.chatbot.routes.get_reply",
         lambda *_args, **_kwargs: SimpleNamespace(
-            text="A safe reply", learning_eligible=False
+            text="A safe reply", learning_eligible=False, safety_level="none"
         ),
     )
     assert login(client).status_code == 302
@@ -26,7 +26,8 @@ def test_chat_endpoint_persists_a_user_and_bot_message(client, app, make_user, m
     response = client.post("/chat_messages", data={"msg": "Hello Juliana"})
 
     assert response.status_code == 200
-    assert response.get_json() == {"msg": "A safe reply"}
+    assert response.get_json()["msg"] == "A safe reply"
+    assert response.get_json()["safety_level"] == "none"
     with app.app_context():
         assert [(item.sender, item.message) for item in ChatMessage.query.all()] == [
             ("user", "Hello Juliana"),

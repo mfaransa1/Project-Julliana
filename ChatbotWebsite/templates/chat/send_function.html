@@ -36,7 +36,15 @@
         type: "POST",
         url: "/chat_messages",
       }).done(function (data) {
-        appendMessage(BOT_NAME, BOT_IMG, "left", data.msg);
+        appendMessage(
+          BOT_NAME,
+          BOT_IMG,
+          "left",
+          data.msg,
+          data.safety_level === "high_concern" || data.safety_level === "immediate_crisis"
+            ? "safety-message"
+            : ""
+        );
       }).fail(function () {
         appendMessage(BOT_NAME, BOT_IMG, "left", "I couldn't send that just now. Please try again.");
       }).always(function () {
@@ -130,10 +138,10 @@
     });
   }
 
-  function appendMessage(name, img, side, text) {
+  function appendMessage(name, img, side, text, variant = "") {
     //append message to chatting area
     const msgHTML = `
-    <div class="chat ${side}-msg">
+    <div class="chat ${side}-msg ${variant}">
         <img src="${img}" class="chat-image">
       <div class="chat-bubble">
         <div class="chat-info">

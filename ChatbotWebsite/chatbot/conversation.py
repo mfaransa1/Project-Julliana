@@ -105,3 +105,21 @@ def follow_up_response(state: ConversationState, message: str) -> str | None:
         "trauma": "You do not have to share details you are not comfortable sharing. What kind of support would feel most helpful right now?",
     }
     return prompts.get(state.topic, "I'm here with you. What would feel most useful to talk through next?")
+
+
+def contextual_answer_response(state: ConversationState, message: str) -> str | None:
+    """Treat a likely short answer as context only under narrow conditions."""
+    words = normalized_phrase(message).split()
+    if not state.topic or not 1 <= len(words) <= 6:
+        return None
+    stress_anchor = bool(set(words) & {"school", "exam", "exams", "work", "family", "relationship"})
+    if not state.awaiting_question and not (state.topic == "stress" and stress_anchor):
+        return None
+    prompts = {
+        "stress": "Thanks for sharing that. It sounds as though that may be adding to the stress. What part feels most difficult right now?",
+        "anxiety": "Thank you for saying that. What happens in your body or thoughts when that feeling starts?",
+        "sad": "Thank you for sharing that with me. Would you like to say a little more about it?",
+        "lonely": "That sounds hard. Is there someone you would feel comfortable reaching out to, even for a short message?",
+        "sleep": "Thanks for explaining. What is your routine like in the hour before bed?",
+    }
+    return prompts.get(state.topic)

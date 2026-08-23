@@ -70,7 +70,12 @@ def chatting():
                     )
                 )
         db.session.commit()
-    return jsonify({"msg": response})
+    return jsonify(
+        {
+            "msg": response,
+            "safety_level": chatbot_reply.safety_level,
+        }
+    )
 
 
 # Topic, Post request, get contents from topic and add all messages to database

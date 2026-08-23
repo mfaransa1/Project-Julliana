@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from ChatbotWebsite.chatbot.classifier import IntentClassifier
 from ChatbotWebsite.chatbot.conversation import (
     ConversationMemory,
+    contextual_answer_response,
     follow_up_response,
     yes_or_no,
 )
@@ -70,6 +71,7 @@ class ChatbotEngine:
             )
 
         contextual = follow_up_response(state, message)
+        contextual = contextual or contextual_answer_response(state, message)
         if contextual:
             self._memory.remember(
                 conversation_id,

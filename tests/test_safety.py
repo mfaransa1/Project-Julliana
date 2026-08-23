@@ -29,3 +29,10 @@ def test_crisis_detector_recognizes_reviewed_kiswahili_and_luo_phrases():
 
     assert detector.check("Nataka kufa").is_crisis is True
     assert detector.check("Aonge gi dwaro mar ngima").is_crisis is True
+
+
+def test_crisis_detector_recognizes_indirect_high_concern_without_flagging_an_idiom():
+    detector = safety.CrisisDetector()
+
+    assert detector.check("Everyone would be better without me").is_crisis is True
+    assert detector.check("This exam is killing me").is_crisis is False

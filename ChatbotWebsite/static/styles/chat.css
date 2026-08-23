@@ -19,6 +19,8 @@
 .right-msg { flex-direction: row-reverse; }
 .right-msg .chat-bubble { color: #fff; background: var(--user-bubble); border-radius: 1rem 1rem .25rem 1rem; }
 .right-msg .chat-info, .right-msg .chat-info-name { color: rgba(255, 255, 255, .82); }
+.safety-message .chat-bubble { background: #fff3d8; border: 1px solid #d79a32; color: #49310d; }
+.safety-message .chat-info, .safety-message .chat-info-name { color: #6b4a14; }
 .chat-image { width: 2.5rem; height: 2.5rem; flex: 0 0 2.5rem; object-fit: cover; border-radius: 50%; border: 2px solid var(--surface); }
 .tools { display: flex; flex-wrap: wrap; gap: .5rem; padding: .75rem 1rem; border-top: 1px solid var(--line); background: var(--surface); }
 .chat-inputarea { display: flex; align-items: flex-end; gap: .75rem; padding: .9rem 1rem; border-top: 1px solid var(--line); background: var(--surface); }
