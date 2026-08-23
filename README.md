@@ -102,7 +102,7 @@ Never commit `.env`. All sensitive values belong in environment variables.
 
 Production refuses to start without `SECRET_KEY` and `DATABASE_URL`. Set `JULIANA_ENV=production`; secure cookie settings are enabled by the production configuration. Serve production traffic only over HTTPS.
 
-For Render PostgreSQL, set `DATABASE_URL` to the database's **Internal Database URL**. The project includes the `psycopg` PostgreSQL driver; do not use the database display name as the URL.
+For Render PostgreSQL, set `DATABASE_URL` to the database's **Internal Database URL**. The project normalizes Render's `postgres://` or `postgresql://` URL to use the included `psycopg` driver; do not use the database display name as the URL.
 
 ## Chatbot training and model lifecycle
 

@@ -14,6 +14,7 @@ ConfigurationError = config.ConfigurationError
 ProductionConfig = config.ProductionConfig
 get_config = config.get_config
 _csv_set = config._csv_set
+_normalize_database_url = config._normalize_database_url
 
 
 class CompleteProductionConfig(ProductionConfig):
@@ -45,3 +46,12 @@ def test_unknown_environment_is_rejected():
 def test_admin_allow_list_is_case_insensitive_and_opt_in():
     assert _csv_set(None) == frozenset()
     assert _csv_set(" Admin, reviewer ") == frozenset({"admin", "reviewer"})
+
+
+def test_postgresql_urls_use_the_installed_psycopg_driver():
+    assert _normalize_database_url("postgres://user:pass@host/db") == (
+        "postgresql+psycopg://user:pass@host/db"
+    )
+    assert _normalize_database_url("postgresql://user:pass@host/db") == (
+        "postgresql+psycopg://user:pass@host/db"
+    )

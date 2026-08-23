@@ -22,9 +22,21 @@ def _as_bool(value: str | None, *, default: bool = False) -> bool:
     return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
+def _normalize_database_url(url: str) -> str:
+    """Use psycopg 3 for Render/PostgreSQL URLs without exposing credentials."""
+    if url.startswith("postgres://"):
+        return "postgresql+psycopg://" + url.removeprefix("postgres://")
+    if url.startswith("postgresql+psycopg2://"):
+        return "postgresql+psycopg://" + url.removeprefix("postgresql+psycopg2://")
+    if url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + url.removeprefix("postgresql://")
+    return url
+
+
 def _database_url() -> str | None:
     """Read the new setting, with a temporary non-secret legacy alias."""
-    return os.getenv("DATABASE_URL") or os.getenv("SQLALCHEMY_DATABASE_URI")
+    url = os.getenv("DATABASE_URL") or os.getenv("SQLALCHEMY_DATABASE_URI")
+    return _normalize_database_url(url) if url else None
 
 
 def _csv_set(value: str | None) -> frozenset[str]:
