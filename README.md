@@ -68,6 +68,17 @@ The legacy artifacts are intentionally version-controlled deployment assets. The
    flask db upgrade
    ```
 
+   For a brand-new empty Render database while the first committed migration is
+   being prepared, a one-time bootstrap is acceptable: run `db.create_all()`
+   from the Render Shell, then establish and commit the migration history before
+   making future schema changes. Never use this bootstrap on a database that
+   already contains production data.
+
+   On Render's free tier, where Shell and pre-deploy commands are unavailable,
+   set `AUTO_CREATE_SCHEMA=true` for one deploy against a brand-new empty
+   database. It creates missing tables at application startup. Immediately set
+   it back to `false` after the service starts; it is not a migration system.
+
    This repository includes the Flask-Migrate integration but does not ship a generated migration revision for the learning/model tables. Generate and review a migration in the target environment before enabling learning candidates:
 
    ```powershell

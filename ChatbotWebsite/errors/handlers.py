@@ -18,7 +18,9 @@ def error_403(error):
 # 500 Error Page
 @errors.app_errorhandler(500)
 def error_500(error):
-    current_app.logger.exception("Unhandled application error")
+    # Do not attach exception details: ORM traces can include private values such
+    # as email addresses and message text in bound SQL parameters.
+    current_app.logger.error("Unhandled application error")
     return render_template("errors/500.html"), 500
 
 

@@ -80,6 +80,8 @@ class Config:
     )
     # Insights are deliberately opt-in and based on exact account usernames.
     ADMIN_USERNAMES = _csv_set(os.getenv("ADMIN_USERNAMES"))
+    # For a brand-new empty database only. Keep disabled after first deployment.
+    AUTO_CREATE_SCHEMA = _as_bool(os.getenv("AUTO_CREATE_SCHEMA"), default=False)
 
     @classmethod
     def validate(cls) -> None:

@@ -33,6 +33,15 @@ def create_app(config_class: type[Config] | None = None):
     login_manager.init_app(app)
     csrf.init_app(app)
 
+    if app.config["AUTO_CREATE_SCHEMA"]:
+        # This opt-in bootstrap is only for a new empty database on platforms
+        # without a release-command feature. It never performs schema upgrades.
+        from ChatbotWebsite import models  # noqa: F401
+
+        with app.app_context():
+            db.create_all()
+        app.logger.warning("Created missing database tables via AUTO_CREATE_SCHEMA.")
+
     # Import the routes
     from ChatbotWebsite.main.routes import main
     from ChatbotWebsite.chatbot.routes import chatbot
