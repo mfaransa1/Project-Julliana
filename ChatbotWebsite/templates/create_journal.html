@@ -1,35 +1,4 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block content %}
-<div class="container-sm px-5">
-    <form method="POST" action="">
-      {{form.hidden_tag()}}
-      <fieldset class="form-group d-grid gap-3">
-        <legend
-          class="fs-1 fw-bold font-monospace border-bottom border-info mb-3 mt-2"
-        >
-          {{legend}}
-        </legend>
-        <div class="form-group">
-          {{form.mood.label(class="form-control-label")}} {%if
-          form.mood.errors%} {{form.mood(class="form-control form-control-lg
-          is-invalid")}} {%for error in form.mood.errors%}
-          <div class="invalid-feedback">{{error}}</div>
-          {%endfor%} {%else%} {{form.mood(class="form-control form-control-lg")}}
-          {%endif%}
-        </div>
-        <div class="form-group">
-          {{form.content.label(class="form-control-label")}} {%if
-          form.content.errors%} {{form.content(class="form-control
-          form-control-lg is-invalid")}} {%for error in form.content.errors%}
-          <div class="invalid-feedback">{{error}}</div>
-          {%endfor%} {%else%} {{form.content(class="form-control
-          form-control-lg",style="height:350px")}} {%endif%}
-        </div>
-      </fieldset>
-      <div class="form-group">
-        {{form.submit(class="btn btn-outline-info btn-lg mt-3")}}
-      </div>
-    </form>
-  </div>
-
-{% endblock content%}
+<main class="container juliana-page reflect-editor"><a class="text-link" href="{{ url_for('journals.all_journals') }}">← Back to Reflect</a><div class="editor-heading"><p class="eyebrow">Reflect</p><h1>{{ legend }}</h1><p class="page-intro">This entry is private. Take your time—there is no right way to write it.</p></div><form method="POST" action="" class="reflect-form">{{ form.hidden_tag() }}<div><label for="{{ form.mood.id }}" class="form-label">{{ form.mood.label.text }}</label>{{ form.mood(class="form-control form-control-lg" + (" is-invalid" if form.mood.errors else ""), placeholder="For example: thoughtful, tired, hopeful") }}{% for error in form.mood.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}</div><div><label for="{{ form.content.id }}" class="form-label">{{ form.content.label.text }}</label>{{ form.content(class="form-control" + (" is-invalid" if form.content.errors else ""), rows="12", placeholder="Write freely. You can return to this later.") }}{% for error in form.content.errors %}<div class="invalid-feedback">{{ error }}</div>{% endfor %}</div>{{ form.submit(class="btn btn-juliana btn-lg") }}</form></main>
+{% endblock content %}

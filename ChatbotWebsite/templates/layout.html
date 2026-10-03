@@ -22,7 +22,7 @@
     >
       <div class="container-fluid">
         <a class="navbar-brand" href="{{url_for('main.home')}}"
-          ><span aria-hidden="true">✦</span> Juliana</a
+          ><span aria-hidden="true"></span> Juliana</a
         >
         <button
           class="navbar-toggler"
@@ -39,31 +39,12 @@
           class="collapse navbar-collapse"
           id="navbarNavDropdown"
         >
-          <ul class="navbar-nav gap-3">
-            <li class="nav-item bg-info text-black rounded">
-              <a
-                class="nav-link active fw-bold"
-                aria-current="page"
-                href="{{url_for('chatbot.chat')}}"
-                >CHAT</a
-              >
-            </li>
-            <li class="nav-item rounded">
-              <a
-                class="nav-link"
-                aria-current="page"
-                href="{{url_for('journals.all_journals')}}"
-                >Journal</a
-              >
-            </li>
-            <li class="nav-item rounded">
-              <a
-                class="nav-link"
-                aria-current="page"
-                href="{{url_for('main.about')}}"
-                >About</a
-              >
-            </li>
+          <ul class="navbar-nav gap-lg-1">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.home') }}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('chatbot.chat') }}">Talk</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('journals.all_journals') }}">Reflect</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.explore') }}">Explore</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('main.resources') }}">Resources</a></li>
           </ul>
           <ul class="navbar-nav ms-lg-auto align-items-lg-center gap-2">
             {% if is_admin %}
@@ -72,11 +53,11 @@
             </li>
             {% endif %}
             <li class="nav-item">
-              <a class="sos nav-link fw-semibold" href="{{url_for('main.sos')}}">Get urgent help</a>
+              <a class="sos nav-link fw-semibold" href="{{url_for('main.sos')}}">GET URGENT HELP</a>
             </li>
             {%if current_user.is_authenticated%}
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('users.account')}}">Account</a>
+              <a class="nav-link" href="{{url_for('users.account')}}">Profile</a>
             </li>
             <li class="nav-item">
               <form action="{{ url_for('users.logout') }}" method="POST">
@@ -123,8 +104,11 @@
     </script>
   <footer class="text-center mt-auto p-3 site-footer">
     <small>
-        © 2026 Project Juliana |
-        <a href="{{ url_for('chatbot.privacy') }}">Privacy Policy</a>
+        © 2026 Juliana |
+        <a href="{{ url_for('main.about') }}">About</a> ·
+        <a href="{{ url_for('main.how_it_works') }}">How it works</a> ·
+        <a href="{{ url_for('main.safety') }}">Safety</a> ·
+        <a href="{{ url_for('chatbot.privacy') }}">Privacy</a>
     </small>
 </footer>
   </body>

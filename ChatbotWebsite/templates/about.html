@@ -1,46 +1,8 @@
-{%extends 'layout.html'%}{%block content%}
-<div class="container-fluid d-grid">
-  <h1
-    id="about-us-title"
-    class="mx-auto mt-2 mb-5 fw-bold font-monospace border-bottom border-info"
-  >
-    About Us
-  </h1>
-  <div class="container text-center">
-    <div class="row row-cols-2">
-      <div class="col">
-        <img
-          src="{{url_for('static',filename='images/chatbot.png')}}"
-          alt="Mental Health Chatbot Picture"
-          class="rounded-circle border border-secondary mx-auto mb-5 d-block shadow"
-          style="width: 18.75rem; height: 18.75rem"
-        />
-      </div>
-      <div class="col">
-        <p>
-          Welcome to Juliana: An AI-Powered Mental Health Companion! This mental health chatbot is designed to provide reliable information and resources to help individuals improve their mental health and wellbeing.
-        </p>
-        <hr>
-        <p>
-          We understand that seeking help for mental health concerns can be challenging, and our chatbot is designed to make the process as comfortable and accessible as possible.
-        </p>
-        <hr>
-        <p>
-          However, please remember that our chatbot is not a substitute for professional help. If you are experiencing a mental health crisis, please seek help from a mental health professional.
-      </div>
-      <div class="col">
-        <h2>Our Mission</h2>
-        <p>
-          We believe that education and awareness are critical components of mental health. Our chatbot aimed to provide accurate and up-to-date information on various mental health conditions, including symptoms, causes and effects. We also provide a variety of resouces, such as mental health tests and exercises, to help you evaluate your mental health and improve your overall wellbeing.
-        </p>
-      </div>
-      <div class="col">
-        <h2>Our Team</h2>
-        <p>
-          Chatbot was developed by a dedicated student who is passionate about mental health. The developer is committed to play a part in breaking down the stigma surrounding mental health and create a supportive community for individuals to seek help. Thank you for choosing our mental health chatbot as your first step towards a healthier and happier life! We are here to support you every step of the way.<br> Contact the developer <strong>(freezerpardon@gmail.com)</strong> if you have any questions or feedback.
-        </p>
-      </div>
-    </div>
-  </div>
-  {%endblock content%}
-</div>
+{% extends "layout.html" %}
+{% block content %}
+<main class="container juliana-page">
+  <p class="eyebrow">About Juliana</p><h1>A thoughtful space for mental wellbeing.</h1>
+  <div class="reading-layout"><div><h2>Why Juliana exists</h2><p>Mental wellbeing is personal. Finding a comfortable place to talk, reflect, and learn is not always easy. Juliana explores how technology can offer a supportive space while keeping human connection and professional care at the centre.</p><h2>What Juliana is</h2><p>A digital mental-wellbeing companion designed for reflection, emotional support, mental-health education, wellbeing exercises, guided conversations, and access to relevant resources.</p></div><aside class="callout"><h2>What Juliana is not</h2><p>Juliana is not a therapist, psychologist, psychiatrist, doctor, diagnostic system, or emergency service.</p><a href="{{ url_for('main.safety') }}">Read the safety guidance</a></aside></div>
+  <section class="reading-section"><h2>From project to platform</h2><p>Juliana began as a university research and development project exploring conversational AI and mental-wellbeing support. It is now continuing as an ongoing product project exploring contextual conversation, culturally aware support, responsible AI, and privacy-conscious technology.</p><p>Juliana does not overstate what it can do. Its role is to offer a supportive starting point and practical tools, while encouraging human and professional support when it is needed.</p></section>
+</main>
+{% endblock content %}

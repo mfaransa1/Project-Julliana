@@ -60,6 +60,13 @@
         msgerForm.requestSubmit();
       }
     });
+
+    document.querySelectorAll("[data-starter]").forEach((starter) => {
+      starter.addEventListener("click", () => {
+        msgerInput.value = starter.dataset.starter;
+        msgerForm.requestSubmit();
+      });
+    });
   });
 
   function setSending(isSending) {
@@ -83,9 +90,9 @@
     document.getElementById("typing-indicator")?.remove();
   }
 
-  function responseTopic(rawTitle) {
+  function responseTopic(rawTitle, event) {
     // post request for topic, bot will response with the content of the topic
-    event.preventDefault();
+    event?.preventDefault();
     $.ajax({
       data: {
         title: rawTitle,
@@ -108,9 +115,9 @@
     });
   }
 
-  function responseTest(test_title){
+  function responseTest(test_title, event){
     //post request for test, bot will response with the selected test
-    event.preventDefault();
+    event?.preventDefault();
     $.ajax({
       data: {
         title: test_title,
@@ -123,9 +130,9 @@
     });
   }
 
-  function responseExercise(exercise_title){
+  function responseExercise(exercise_title, event){
     //post request for exercise, bot will response with the selected mindfulness exercise
-    event.preventDefault();
+    event?.preventDefault();
     $.ajax({
       data: {
         title: exercise_title,

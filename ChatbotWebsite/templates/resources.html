@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="container juliana-page resource-page">
+  <p class="eyebrow">Resources</p><h1>Support beyond the screen.</h1><p class="page-intro">Juliana works best alongside people, communities and organisations that can offer real-world care, practical help and connection.</p>
+  <section class="resource-section" aria-labelledby="community-support">
+    <div class="section-heading"><p class="eyebrow">Kenya support directory</p><h2 id="community-support">People and organisations to contact</h2><p>Contact details are stored separately from the application code so they can be reviewed and kept current.</p></div>
+    {% if support_resources %}<div class="resource-grid">{% for resource in support_resources %}<article class="resource-card"><h3>{{ resource.name }}</h3><p>{{ resource.description }}</p><div class="resource-card__phones">{% for phone in resource.phones %}<a href="tel:{{ phone|replace('-', '')|replace(' ', '') }}">{{ phone }}</a>{% endfor %}</div><a class="text-link" href="{{ resource.website }}" target="_blank" rel="noopener noreferrer">Visit organisation <span aria-hidden="true">↗</span></a></article>{% endfor %}</div>{% endif %}
+  </section>
+  <section class="reading-section"><h2>Explore within Juliana</h2><p>Use <a class="text-link" href="{{ url_for('main.explore') }}">Explore</a> for educational topics, mindfulness and existing check-ins. Use <a class="text-link" href="{{ url_for('journals.all_journals') }}">Reflect</a> to write privately in your journal.</p></section>
+  <aside class="callout resource-note"><h2>Need urgent help?</h2><p>If you are in immediate danger or cannot stay safe, contact emergency services or go to the nearest emergency department. <a href="{{ url_for('main.sos') }}">See urgent-support guidance.</a></p></aside>
+</main>
+{% endblock content %}

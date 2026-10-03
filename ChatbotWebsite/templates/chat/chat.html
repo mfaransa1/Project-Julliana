@@ -1,161 +1,46 @@
-{% extends 'layout.html'%} {%block style%}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='styles/chat.css') }}"
-/>
-{%endblock style%}
+{% extends "layout.html" %}
+{% block style %}<link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">{% endblock style %}
+{% block content %}
+<main class="talk-shell">
+  <aside class="talk-sidebar" aria-label="About Talk">
+    <p class="eyebrow">Talk</p><h1>A little space to talk things through.</h1>
+    <p>Juliana can offer reflection, general wellbeing information, and practical exercises. It is not a person, therapist, or emergency service.</p>
+    <a class="text-link" href="{{ url_for('main.safety') }}">Read safety guidance <span aria-hidden="true">→</span></a>
+    <div class="talk-sidebar__footer"><p class="small mb-2">Need urgent human support?</p><a class="btn btn-juliana-outline w-100" href="{{ url_for('main.sos') }}">Get urgent help</a></div>
+  </aside>
 
-{% block content%}
-<div id="chatbot" class="chatbot">
-  <div id="chatbot-profile"  class="chatbot-profile">
-    <img
-      src="{{url_for('static',filename='images/chatbot.png')}}"
-      id="chatbot-image"
-      class="rounded-circle border border-secondary my-4 mx-auto d-block"
-      style="width: 15.625rem; height: 15.625rem"
-    />
-    <div class="container d-grid gap-3 px-5">
-      <a
-        class="btn btn-outline-info btn-lg"
-        href="{{url_for('main.about')}}"
-      >
-        About us🤖
-      </a>
-      <button type="button" class="btn btn-lg btn-info" data-bs-toggle="popover" data-bs-title="Help" data-bs-placement="top" data-bs-content="Start the conversation by typing a greeting or ask a question (E.g. What is Juliana, What is the cause of depression). You can also select a specific topic, test or exercise through the tab above the text input box. Having trouble with the chatting? Avoid typo as this chatbot has built-in autocorrector, thank you!">Need Help?</button>
-      <button type="button" class="btn btn-lg btn-info" data-bs-toggle="popover" data-bs-title="Subject List" data-bs-placement="bottom" data-bs-content="I talk about Mental Health, Addiction, Anxiety, Depression, Disorders, Feelings, Loneliness, Medication, Meditation, Mindfulness, Personal growth, Phobia, Self-care, Sleep, Stress, Suicide, Trauma and more.">Subject</button>
-      <div class="text-center">
-        Developed by Pardon Freezer <strong>(freezerpardon@gmail.com)</strong>
-      </div>
-    </div>
-  </div>
-  <div class="chat-area">
-    <main id="main-chat" class="main-chat">
+  <section class="talk-panel" aria-label="Conversation with Juliana">
+    <header class="talk-header"><div><p class="eyebrow mb-1">Conversation</p><h2>Juliana</h2></div><span class="talk-status"><span aria-hidden="true"></span> Here to listen</span></header>
+    <div id="main-chat" class="main-chat" aria-live="polite">
       {% if current_user.is_authenticated and messages %}
-        {%for message in messages%}
-          {%if message.sender == 'user'%}
-            <div class="chat right-msg">
-              <img src="{{url_for('static',filename='profile_images/'+current_user.profile_image)}}" class="chat-image"/>
-              <div class="chat-bubble">
-                <div class="chat-info">
-                  <div class="chat-info-name">You</div>
-                  <div class="chat-info-time">{{message.timestamp.strftime('%d/%m/%Y, %H:%M')}}</div>
-                </div>
-                <div class="chat-text">
-                  {{message.message}}
-                </div>
-              </div>
-            </div>
-          {%else%}
-            <div class="chat left-msg">
-              <img src="{{url_for('static',filename='images/chatbot.png')}}" class="chat-image"/>
-              <div class="chat-bubble">
-                <div class="chat-info">
-                  <div class="chat-info-name">Juliana Chatbot</div>
-                  <div class="chat-info-time">{{message.timestamp.strftime('%d/%m/%Y, %H:%M')}}</div>
-                </div>
-                <div class="chat-text">
-                  {{message.message}}
-                </div>
-              </div>
-            </div>
-          {%endif%}
-        {%endfor%}
-        <hr>
-      {%endif%}
-      <p class="text-muted text-center mb-2">Today</p>
-      <div class="chat left-msg">
-          <img src="{{url_for('static',filename='images/chatbot.png')}}" class="chat-image"/>
-        <div class="chat-bubble">
-          <div class="chat-info">
-            <div class="chat-info-name">Juliana Chatbot</div>
-            <div class="chat-info-time">**:**</div>
+        <p class="conversation-divider">Conversation history</p>
+        {% for message in messages %}
+          <div class="chat {{ 'right-msg' if message.sender == 'user' else 'left-msg' }}">
+            <img src="{{ url_for('static', filename='profile_images/' + current_user.profile_image if message.sender == 'user' else 'images/chatbot.png') }}" class="chat-image" alt="">
+            <div class="chat-bubble"><div class="chat-info"><div class="chat-info-name">{{ 'You' if message.sender == 'user' else 'Juliana' }}</div><time class="chat-info-time">{{ message.timestamp.strftime('%d %b, %H:%M') }}</time></div><div class="chat-text">{{ message.message }}</div></div>
           </div>
-          {%if current_user.is_authenticated%}
-            <div class="chat-text">
-              Please do understand that this is a chatbot and not a real person, please don't subtitute this for real help.
-              <br><br>
-              Always best to seek professional help if you are in need of it.
-              <br><br>
-              With that said,
-              <br>
-              Hi {{current_user.username}}, welcome back to Juliana Chatbot! Go ahead and send me a message. 😄 
-            </div>
-          {%else%}
-          <div class="chat-text">
-            Hello, welcome to Juliana Chatbot! Go ahead and send me a message. 😄
-            <br><br>
-              Please do understand that this is a chatbot and not a real person, please don't subtitute this for real help.
-              <br><br>
-              Always best to seek professional help if you are in need of it.
-          </div>
-          {%endif%}
-        </div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="chat left-msg talk-welcome">
+        <img src="{{ url_for('static', filename='images/chatbot.png') }}" class="chat-image" alt="">
+        <div class="chat-bubble"><div class="chat-info"><div class="chat-info-name">Juliana</div><div class="chat-info-time">Now</div></div><div class="chat-text">{% if current_user.is_authenticated %}Welcome back, {{ current_user.username }}. What is on your mind today?{% else %}Welcome. What is on your mind today?{% endif %}</div></div>
       </div>
-    </main>
-    <script>
-      let element = document.getElementById("main-chat");
-      setTimeout(() => {
-        element.scrollTop = element.scrollHeight;
-    }, 100); 
-    </script>
-    <div>
-      <div class="tools border-top border-info gap-3">
-        <div class="btn-group dropup">
-          <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Topics📜
-          </button>
-          <ul class="dropdown-menu">
-            {% for topic in (topics.topics)%}
-              <li>
-                <button class="dropdown-item " onclick="responseTopic('{{topic.title}}')">
-                  {{topic.title}}
-                </button>
-              </li>
-            {% endfor%} 
-          </ul>
-        </div>
-        <div class="btn-group dropup">
-          <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Tests📝
-          </button>
-          <ul class="dropdown-menu">
-            {% for test in (tests.tests)%}
-              <li>
-                <button class="dropdown-item" id="test-button-{{test.title}}" onclick="responseTest('{{test.title}}')">
-                  {{test.title}}
-                </button>
-              </li>
-            {% endfor%} 
-          </ul>
-        </div>
-        <div class="btn-group dropup">
-          <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Mindfulness🎧
-          </button>
-          <ul class="dropdown-menu">
-            {% for exercise in (mindfulness_exercises.mindfulness_exercises) %}
-            <li>
-              <button class="dropdown-item" id="exercise-{{exercise.title}}" onclick="responseExercise('{{exercise.title}}')">
-                {{exercise.title}}
-              </button>
-            </li>
-            {%endfor%}
-          </ul>
-        </div>
-      </div>
-      <form id="message-form" class="chat-inputarea" image_file="{{ current_user.profile_image if current_user.is_authenticated else 'default.jpg' }}">
-        <textarea
-          class="chat-input"
-          id="textInput"
-          rows="1"
-          autocomplete="off"
-          placeholder="Write a message… (Enter to send, Shift+Enter for a new line)"
-          aria-label="Message Juliana"
-        ></textarea>
-        <button id="send-button" type="submit" class="btn btn-info">Send</button>
-      </form>
+
+      {% if not (current_user.is_authenticated and messages) %}
+      <section class="conversation-starters" aria-labelledby="starter-heading"><h3 id="starter-heading">Not sure where to begin?</h3><div>{% for starter in conversation_starters %}<button type="button" class="starter-chip" data-starter="{{ starter }}">{{ starter }}</button>{% endfor %}</div></section>
+      {% endif %}
     </div>
-  </div>
-  {%include "chat/send_function.html"%}
-  {%endblock content%}
-</section>
+
+    <div class="talk-actions">
+      <div class="dropdown"><button type="button" class="tool-trigger" data-bs-toggle="dropdown" aria-expanded="false">Explore topics</button><ul class="dropdown-menu">{% for topic in topics.topics %}<li><button class="dropdown-item" onclick="responseTopic('{{ topic.title }}', event)">{{ topic.title }}</button></li>{% endfor %}</ul></div>
+      <div class="dropdown"><button type="button" class="tool-trigger" data-bs-toggle="dropdown" aria-expanded="false">Try a check-in</button><ul class="dropdown-menu">{% for test in tests.tests %}<li><button class="dropdown-item" onclick="responseTest('{{ test.title }}', event)">{{ test.title }}</button></li>{% endfor %}</ul></div>
+      <div class="dropdown"><button type="button" class="tool-trigger" data-bs-toggle="dropdown" aria-expanded="false">Practice mindfulness</button><ul class="dropdown-menu">{% for exercise in mindfulness_exercises.mindfulness_exercises %}<li><button class="dropdown-item" onclick="responseExercise('{{ exercise.title }}', event)">{{ exercise.title }}</button></li>{% endfor %}</ul></div>
+    </div>
+    <form id="message-form" class="chat-inputarea" image_file="{{ current_user.profile_image if current_user.is_authenticated else 'default.jpg' }}">
+      <label class="visually-hidden" for="textInput">Message Juliana</label><textarea class="chat-input" id="textInput" rows="1" autocomplete="off" placeholder="Write a message…" aria-label="Message Juliana"></textarea><button id="send-button" type="submit" class="btn btn-juliana">Send</button>
+    </form><p class="talk-input-note">Enter to send · Shift + Enter for a new line</p>
+  </section>
+</main>
+{% include "chat/send_function.html" %}
+{% endblock content %}

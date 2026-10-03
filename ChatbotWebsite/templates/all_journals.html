@@ -1,62 +1,8 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 {% block content %}
-    
-    <div class="container-fluid d-grid">
-        <a class="btn mx-auto mt-3 mb-4 btn-info btn-lg" href="{{url_for('journals.new_journal')}}">Add Journal</a>
-        <form class="row justify-content-center mb-4" method="GET" action="{{ url_for('journals.all_journals') }}">
-            <div class="col-md-6">
-                <label class="visually-hidden" for="journal-search">Search your journals</label>
-                <div class="input-group">
-                    <input id="journal-search" class="form-control" type="search" name="q" value="{{ search_query }}" maxlength="100" placeholder="Search your private journals">
-                    <button class="btn btn-outline-info" type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-        {% if journals.items %}
-        <div class="ms-auto">
-            {% for page_num in journals.iter_pages(left_edge=1,right_edge=1, left_current=1,right_current=1) %}
-                {%if page_num%}
-                    {%if journals.page ==page_num%}
-                    <a href="{{url_for('journals.all_journals',page=page_num,q=search_query)}}" class="btn btn-secondary mb-4">{{page_num}}</a>
-                    {%else%}
-                        <a href="{{url_for('journals.all_journals',page=page_num,q=search_query)}}" class="btn btn-outline-secondary mb-4">{{page_num}}</a>
-                    {%endif%}
-                {%else%}
-                    ...
-                {%endif%}
-            {% endfor %}
-        </div>
-        {% for journal in journals.items %}
-            <div class="container py-1">
-            <div class="row d-flex justify-content-center align-items-center">
-                <div class="col col-10">
-                <div class="card mb-5 border-info" style="border-radius: 15px;">
-                    <div class="card-body p-4">
-                    <h3 class="mb-3">Feeling <a href="{{url_for('journals.journal',journal_id=journal.id)}}" class="text-info text-decoration-none">{{journal.mood}}</a> on {{journal.timestamp.strftime('%d.%m.%Y')}}</h3>
-                    <p class="text-truncate">{{journal.content}} </p>
-                    
-                    <hr class="my-3">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <img src="{{url_for('static',filename='profile_images/'+current_user.profile_image)}}" alt="profile-avatar"
-                            class="img-fluid rounded-circle me-3" width="50">
-                        <div class="col">
-                            <p class="mb-0">{{journal.user.username}}</p>
-                            <small class="text-muted">Created on {{journal.timestamp.strftime('%d/%m/%Y, %A, %H:%M')}}</small>
-                        </div>
-                        <a href="{{url_for('journals.journal',journal_id=journal.id)}}" class="btn btn-outline-secondary">View</a>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        {% endfor %}
-        {% else %}
-        <section class="container text-center py-5">
-            <h2>{% if search_query %}No matching journal entries{% else %}Your journal is ready when you are{% endif %}</h2>
-            <p class="text-muted">{% if search_query %}Try a different word or clear the search.{% else %}Journal entries are private and visible only to you.{% endif %}</p>
-            {% if not search_query %}<a class="btn btn-info" href="{{ url_for('journals.new_journal') }}">Write your first entry</a>{% endif %}
-        </section>
-        {% endif %}
-    </div>
-{% endblock content%}
+<main class="container juliana-page reflect-page"><div class="reflect-header"><div><p class="eyebrow">Reflect</p><h1>Make space for what is on your mind.</h1><p class="page-intro">Your entries are private and visible only to you.</p></div><a class="btn btn-juliana" href="{{ url_for('journals.new_journal') }}">Write an entry</a></div>
+  <form class="reflect-search" method="GET" action="{{ url_for('journals.all_journals') }}"><label class="visually-hidden" for="journal-search">Search your private journal entries</label><input id="journal-search" class="form-control" type="search" name="q" value="{{ search_query }}" maxlength="100" placeholder="Search your reflections"><button class="btn btn-juliana-outline" type="submit">Search</button></form>
+  {% if journals.items %}<section class="journal-list" aria-label="Your private entries">{% for journal in journals.items %}<article class="journal-card"><div><p class="journal-card__meta">{{ journal.timestamp.strftime('%d %B %Y · %H:%M') }}</p><h2>{{ journal.mood }}</h2><p>{{ journal.content }}</p></div><a class="text-link" href="{{ url_for('journals.journal', journal_id=journal.id) }}">Open entry <span aria-hidden="true">→</span></a></article>{% endfor %}</section>
+  {% if journals.pages > 1 %}<nav class="journal-pages" aria-label="Journal pages">{% for page_num in journals.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=1) %}{% if page_num %}<a class="{{ 'active' if journals.page == page_num else '' }}" href="{{ url_for('journals.all_journals', page=page_num, q=search_query) }}">{{ page_num }}</a>{% else %}<span>…</span>{% endif %}{% endfor %}</nav>{% endif %}
+  {% else %}<section class="reflect-empty"><p class="eyebrow">Your private space</p><h2>{% if search_query %}No matching reflections{% else %}Start where you are.{% endif %}</h2><p>{% if search_query %}Try another word or clear the search.{% else %}There is no right way to write here. A few words is enough.{% endif %}</p>{% if not search_query %}<a class="btn btn-juliana" href="{{ url_for('journals.new_journal') }}">Write your first entry</a>{% endif %}</section>{% endif %}
+</main>{% endblock content %}

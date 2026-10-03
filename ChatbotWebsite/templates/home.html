@@ -1,138 +1,33 @@
-{%extends 'layout.html'%} {%block navigation%}{%endblock navigation%} {%block content%}
-<div id="home-container" class="container-fluid d-grid gap-3">
-  <img
-    src="{{url_for('static',filename='images/chatbot.png')}}"
-    alt="Mental Health Chatbot Picture"
-    class="rounded-circle border border-secondary mt-3 mx-auto d-block shadow"
-    style="width: 21.875rem; height: 21.875rem"
-  />
-  <h1
-    id="chatbot-name"
-    class="mx-auto my-2 fw-bold font-monospace border-bottom border-info"
-  >
-    Project Juliana: An AI-Powered Mental Health Companion
-  </h1>
+{% extends "layout.html" %}
 
+{% block content %}
+<main>
+  <section class="juliana-hero">
+    <div class="container juliana-hero__content">
+      <p class="eyebrow">A space for your wellbeing</p>
+      <h1>Meet Juliana</h1>
+      <p class="juliana-hero__lead">A space to think, talk, understand, and take care of your mental wellbeing.</p>
+      <p class="juliana-hero__copy">Juliana is a digital mental-wellbeing companion for reflection, supportive conversation, practical exercises, and learning at your own pace.</p>
+      <div class="d-flex flex-wrap gap-3">
+        <a class="btn btn-juliana btn-lg" href="{{ url_for('chatbot.chat') }}">Talk to Juliana</a>
+        <a class="btn btn-juliana-outline btn-lg" href="{{ url_for('main.explore') }}">Explore tools</a>
+      </div>
+      <p class="juliana-hero__note">Juliana is not a replacement for professional or emergency care.</p>
+    </div>
+  </section>
 
+  <section class="container juliana-section">
+    <div class="section-heading"><p class="eyebrow">What Juliana can help with</p><h2>Support that meets you where you are</h2></div>
+    <div class="row g-3 g-lg-4">
+      <div class="col-md-6 col-xl-3"><article class="product-card"><span>01</span><h3>Talk</h3><p>Have a conversation when something is on your mind.</p><a href="{{ url_for('chatbot.chat') }}">Start a conversation</a></article></div>
+      <div class="col-md-6 col-xl-3"><article class="product-card"><span>02</span><h3>Understand</h3><p>Explore mental wellbeing, emotions, stress, anxiety, and more.</p><a href="{{ url_for('main.explore') }}">Explore topics</a></article></div>
+      <div class="col-md-6 col-xl-3"><article class="product-card"><span>03</span><h3>Reflect</h3><p>Write privately and make room for what you are experiencing.</p><a href="{{ url_for('journals.all_journals') }}">Open Reflect</a></article></div>
+      <div class="col-md-6 col-xl-3"><article class="product-card"><span>04</span><h3>Practice</h3><p>Try breathing, mindfulness, and self-guided wellbeing exercises.</p><a href="{{ url_for('main.explore') }}">Find a practice</a></article></div>
+    </div>
+  </section>
 
-        {% if current_user.is_authenticated %}
-        <a
-          id="chat-now-link"
-          class="btn btn-info mx-auto d-block"
-          style="
-            --bs-btn-padding-y: 1.25rem;
-            --bs-btn-padding-x: 5.5rem;
-            --bs-btn-font-size: 2rem;
-            --bs-btn-font-weight: 700;
-          "
-          href="{{url_for('chatbot.chat')}}"
-        >
-          CHAT NOW
-        </a>
-        {% else %}
-        <button
-          id="start-now-link"
-          class="btn btn-info mx-auto d-block"
-          style="
-            --bs-btn-padding-y: 1.25rem;
-            --bs-btn-padding-x: 5.5rem;
-            --bs-btn-font-size: 2rem;
-            --bs-btn-font-weight: 700;
-          "
-          data-bs-toggle="modal"
-          data-bs-target="#entryModal"
-        >
-        LOGIN / REGISTER
-        </button>
-        <div
-          class="modal fade"
-          id="entryModal"
-          tabindex="-1"
-          aria-labelledby="entryModalLabel"
-          aria-hidden="true"
-        >
-          <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-          >
-            <div class="modal-content">
-              <div class="modal-header border-bottom-0 pb-0">
-                <h1 class="modal-title fw-bold font-monospace lh-sm">
-                  Login / Register
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col d-flex flex-column align-items-center">
-                    <small class="text-muted">Already Have an Account?</small>
-                    <a
-                      class="btn btn-outline-info btn-lg mt-1"
-                      href="{{url_for('users.login')}}"
-                      >Login Now</a
-                    >
-                  </div>
-                  <div class="col d-flex flex-column align-items-center">
-                    <small class="text-muted">New User? Wohoo</small>
-                    <a
-                      class="btn btn-outline-info btn-lg mt-1"
-                      href="{{url_for('users.register')}}"
-                      >Register Now</a
-                    >
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div class="modal-header border-bottom-0 pb-0">
-                <h1 class="modal-title fw-bold font-monospace lh-sm">
-                  Or as Guest
-                </h1>
-              </div>
-              <div class="modal-body">
-                <a
-                  class="btn btn-outline-info btn-lg d-block"
-                  href="{{url_for('chatbot.chat')}}"
-                  style="--bs-btn-padding-x: 2.5rem"
-                  >Continue</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-        {%endif%}
-      
+  <section class="juliana-band"><div class="container"><p class="eyebrow">How Juliana works</p><h2>Conversation → Understanding → Context → Safety → Knowledge → Response</h2><p>Juliana combines curated content with conversation, language, and safety signals. It is designed to support—not to diagnose or replace human care.</p><a class="text-link" href="{{ url_for('main.how_it_works') }}">Learn how Juliana works <span aria-hidden="true">→</span></a></div></section>
 
-    <a
-      href="{{url_for('main.about')}}"
-      id="about-me-link"
-      class="btn btn-outline-info mx-auto d-block"
-      style="
-        --bs-btn-padding-y: 1.25rem;
-        --bs-btn-padding-x: 5.5rem;
-        --bs-btn-font-size: 2rem;
-        --bs-btn-border-width: 0;
-      "
-    >
-      About Us
-    </a>
-    {%if current_user.is_authenticated %}
-        <a
-          href="{{url_for('users.logout')}}"
-          id="about-me-link"
-          class="btn btn-outline-secondary mx-auto d-block"
-          style="
-            --bs-btn-padding-x: 3.5rem;
-            --bs-btn-font-size: 1rem;
-          "
-        >
-          Logout
-        </a>
-      {%endif%}
-  </div>
-  
-  {%endblock content%}
-</div>
+  <section class="container juliana-section"><div class="row align-items-start g-4"><div class="col-lg-5"><p class="eyebrow">Built around three principles</p><h2>Human wellbeing stays at the centre.</h2></div><div class="col-lg-7"><div class="principle"><h3>Listen</h3><p>Juliana should understand before rushing to an answer.</p></div><div class="principle"><h3>Understand</h3><p>Support is not always about immediately giving advice.</p></div><div class="principle"><h3>Connect</h3><p>Technology should complement human relationships and professional care.</p></div></div></div></section>
+</main>
+{% endblock content %}

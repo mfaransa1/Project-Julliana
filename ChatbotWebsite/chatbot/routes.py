@@ -6,6 +6,7 @@ from ChatbotWebsite import db
 from ChatbotWebsite.chatbot.engine import get_reply
 from ChatbotWebsite.chatbot.learning import propose_candidate
 from ChatbotWebsite.chatbot.mindfulness import get_description, mindfulness_exercises
+from ChatbotWebsite.chatbot.starters import get_conversation_starters
 from ChatbotWebsite.chatbot.test import get_questions, get_test_messages, tests
 from ChatbotWebsite.chatbot.topic import get_content, topics
 from ChatbotWebsite.models import ChatMessage, LearningCandidate
@@ -32,6 +33,7 @@ def chat():
         messages=messages,
         tests=tests,
         mindfulness_exercises=mindfulness_exercises,
+        conversation_starters=get_conversation_starters(),
     )
 
 
