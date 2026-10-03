@@ -36,3 +36,10 @@ def test_crisis_detector_recognizes_indirect_high_concern_without_flagging_an_id
 
     assert detector.check("Everyone would be better without me").is_crisis is True
     assert detector.check("This exam is killing me").is_crisis is False
+
+
+def test_crisis_detector_recognizes_reviewed_explicit_wording_variants():
+    detector = safety.CrisisDetector()
+
+    assert detector.check("I want to kms").is_crisis is True
+    assert detector.check("I want to end it all").is_crisis is True

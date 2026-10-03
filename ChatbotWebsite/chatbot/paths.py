@@ -25,6 +25,7 @@ TESTS_PATH = DATA_DIR / "tests.json"
 TOPICS_PATH = DATA_DIR / "topics.json"
 MINDFULNESS_PATH = MINDFULNESS_DIR / "mindfulness.json"
 CONVERSATION_STARTERS_PATH = DATA_DIR / "conversation_starters.json"
+KNOWLEDGE_PATH = DATA_DIR / "knowledge.json"
 
 LEGACY_MODEL_PATH = PROJECT_ROOT / "chatbot-model.h5"
 LEGACY_DATA_PATH = PROJECT_ROOT / "data.pickle"

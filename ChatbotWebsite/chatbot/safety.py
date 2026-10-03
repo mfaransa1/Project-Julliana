@@ -22,6 +22,11 @@ IMMEDIATE_PATTERNS = (
     "i do not want to be alive",
     "i want to hurt myself",
     "i am going to hurt myself",
+    "kill my self",
+    "hurt my self",
+    "end it all",
+    "i want to kms",
+    "i am suicidal",
     "suicide",
     "nataka kujitoa",
     "life is pointless",
@@ -54,10 +59,10 @@ NON_CRISIS_IDIOMS = (
 
 CRISIS_RESPONSE = (
     "I'm really sorry you're feeling this way. You are not alone.\n"
-    "Please reach out immediately:\n"
-    "- Call 1199 (Kenya Red Cross emergency support)\n"
-    "- Talk to someone you trust\n"
-    "- Visit a nearby hospital"
+    "Please seek immediate real-world support:\n"
+    "- Contact local emergency services or go to the nearest emergency department\n"
+    "- Tell someone you trust and, if you can, stay with them\n"
+    "- Use Juliana's Get urgent help page to find the current support directory"
 )
 
 

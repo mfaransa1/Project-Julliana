@@ -4,6 +4,7 @@ from flask import Blueprint, current_app, jsonify, render_template, request, ses
 from flask_login import current_user
 from ChatbotWebsite import db
 from ChatbotWebsite.chatbot.engine import get_reply
+from ChatbotWebsite.chatbot.context import state_for_session, state_from_session
 from ChatbotWebsite.chatbot.learning import propose_candidate
 from ChatbotWebsite.chatbot.mindfulness import get_description, mindfulness_exercises
 from ChatbotWebsite.chatbot.starters import get_conversation_starters
@@ -15,9 +16,15 @@ chatbot = Blueprint("chatbot", __name__)
 
 
 def _conversation_id() -> str:
+    session_id = session.setdefault("chat_context_id", secrets.token_urlsafe(16))
     if current_user.is_authenticated:
-        return f"user:{current_user.id}"
-    return f"guest:{session.setdefault('chat_context_id', secrets.token_urlsafe(16))}"
+        return f"user:{current_user.id}:{session_id}"
+    return f"guest:{session_id}"
+
+
+def _conversation_state():
+    """Get the current signed-session state; it contains no raw message text."""
+    return state_from_session(session.get("chat_context"))
 
 
 # Chat Page (Main Page)
@@ -45,7 +52,9 @@ def chatting():
         return jsonify({"error": "Please enter a message."}), 400
     if len(message) > 3000:
         return jsonify({"error": "Messages must be 3,000 characters or fewer."}), 400
-    chatbot_reply = get_reply(message, conversation_id=_conversation_id())
+    state = _conversation_state()
+    chatbot_reply = get_reply(message, conversation_id=_conversation_id(), state=state)
+    session["chat_context"] = state_for_session(state)
     response = chatbot_reply.text
     if current_user.is_authenticated:
         user_message = ChatMessage(sender="user", message=message, user=current_user)
